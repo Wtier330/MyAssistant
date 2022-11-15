@@ -15,11 +15,12 @@ public class NotepadSqliteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         if (db==null){
-//            db.execSQL("create table notepadTable(id PRIMARY KEY AUTOINCREMENT,insert_time data,)");
+//            db.execSQL("create table notepadTable(id PRIMARY KEY AUTOINCREMENT,insert_time data, )");
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        
     }
 }
