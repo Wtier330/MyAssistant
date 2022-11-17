@@ -2,23 +2,24 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/notebg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Notepad_Main">
-
-    <androidx.constraintlayout.helper.widget.Flow
+    android:background="@drawable/notebg"
+    tools:context=".Activity.Notepad_Main">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fbt_note_add"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="right|bottom"
+        android:layout_margin="20dp"
         android:background="@drawable/addto"
-        android:layout_margin="20dp"/>
-
+         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rlv_note"
-        android:onClick="add"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:onClick="add" />
+
+
 
 </FrameLayout>
