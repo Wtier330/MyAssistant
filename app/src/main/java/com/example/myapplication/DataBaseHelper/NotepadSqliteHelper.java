@@ -14,13 +14,17 @@ public class NotepadSqliteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if (db==null){
-//            db.execSQL("create table notepadTable(id PRIMARY KEY AUTOINCREMENT,insert_time data, )");
+        if (db == null) {
+            db.execSQL("create table if not exists" +
+                    " notepadTable(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "insert_time data," +
+                    "title varchar," +
+                    "content text )");
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        
+
     }
 }
