@@ -11,7 +11,7 @@ public class NotepadSqliteOpenHelper extends SQLiteOpenHelper {
     public static final String NOTE_TABLE_NAME = "note";
     public static final String createtablesql = "create table if not exists"
             + NOTE_TABLE_NAME +
-            "(id integer primary key autoincrement, title text, content text, create_time date)";
+            "(id integer primary key autoincrement, title text, content text, create_time date, create_date date)";
 
     public NotepadSqliteOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

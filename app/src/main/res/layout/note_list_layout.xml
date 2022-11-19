@@ -3,13 +3,14 @@
     android:id="@+id/rl_note_item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/tv_note_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/tv_note_time"
+        android:layout_below="@+id/tv_note_date"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="title"
@@ -26,7 +27,7 @@
         android:gravity="center"
         android:maxLines="2"
         android:text="summary"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_note_time"
@@ -45,6 +46,7 @@
         android:id="@+id/tv_note_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"

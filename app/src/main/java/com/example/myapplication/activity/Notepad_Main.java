@@ -25,7 +25,6 @@ public class Notepad_Main extends AppCompatActivity {
     private List<Note> mNotes;
     private NotepadSqliteOpenHelper notepadSqliteOpenHelper;
     private NoteAdapter noteAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,19 +44,14 @@ public class Notepad_Main extends AppCompatActivity {
     private void DBinit() {
         mNotes = new ArrayList<>();
 
-        Note note = new Note();
-        note.setTitle("title test 1");
-        note.setContent("content text 1");
-        note.setCreatedTime(getCurrentTimeFormat());
+        Note note = Note.builder().title("title1").content("content1").createTime(new Date()).build();
         mNotes.add(note);
         /*
          * 假数据测试代码
          * */
         for (int i = 0; i < 29; i++) {
-            Note note1 = new Note();
-            note1.setTitle("title test 2" + i);
-            note1.setContent("content text 2" + i);
-            note1.setCreatedTime(getCurrentTimeFormat());
+            Note note1 = Note.builder().title("title1").content("content1").createTime(new Date()).build();
+
             mNotes.add(note1);
         }
     }

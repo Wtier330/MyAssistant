@@ -2,6 +2,14 @@
 package com.example.myapplication.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author WTL
@@ -9,53 +17,22 @@ import java.io.Serializable;
  * @date 2022/11/17
  * @describe 该类仅作为记事本的实体类
  */
+@Data
+@Builder
 public class Note implements Serializable {
+    private String id;
     private String title;
     private String content;
-    private String createdTime;
-    private String id;
+    private Date createTime;
 
-    public String getTitle() {
-        return title;
+    protected String getCreateTimeAsString(String parttern) {
+        SimpleDateFormat s = new SimpleDateFormat(parttern);
+        return s.format(this.createTime);
     }
-
-
-    public void setTitle(String title) {
-        this.title = title;
+    public String getCreateTimeAsString() {
+        return getCreateTimeAsString("HH:mm");
     }
-
-    public String getContent() {
-        return content;
-    }
-
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Note{" +
-                "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", createdTime='" + createdTime + '\'' +
-                ", id='" + id + '\'' +
-                '}';
+    public String getCreateDateAsString() {
+        return getCreateTimeAsString("YYYY-MM-dd");
     }
 }
