@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myapplication">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".activity.Note_Edit"
+            android:label="编辑记事"
+            android:parentActivityName=".activity.Notepad_Main" />
+            android:exported="false" />
+        <activity
+            android:name=".activity.Note_Add"
+            android:exported="false"
+            android:label="添加记事"
+            android:parentActivityName=".activity.Notepad_Main" />
+        <activity
+            android:name=".activity.Notepad_Main"
+            android:exported="false"
+            android:label="记事本列表主界面" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

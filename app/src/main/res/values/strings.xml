@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="main_apps_note_btn_name">记事本</string>
+    <string-array name="main_apps_btn_name">
+        <item>记事本</item>
+    </string-array>
+
+</resources>
