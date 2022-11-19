@@ -1,4 +1,4 @@
-package com.example.myapplication.Activity;
+package com.example.myapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.myapplication.Adapter.NoteAdapter;
-import com.example.myapplication.Bean.Note;
-import com.example.myapplication.DataBaseHelper.NotepadSqliteOpenHelper;
+import com.example.myapplication.adapter.NoteAdapter;
+import com.example.myapplication.bean.Note;
+import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Notepad_Main extends AppCompatActivity {
+
     RecyclerView rlv_note;
     FloatingActionButton fbt_note_add;
     private List<Note> mNotes;
@@ -62,7 +63,7 @@ public class Notepad_Main extends AppCompatActivity {
     }
 
     private String getCurrentTimeFormat() {
-        SimpleDateFormat s = new SimpleDateFormat("YYYY年MM月dd日 HH:mm:ss");
+        SimpleDateFormat s = new SimpleDateFormat("HH:mm");
         Date d = new Date();
         return s.format(d);
     }

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     app:backgroundTint="@null"
 
-    tools:context=".Activity.Note_Edit">
+    tools:context=".activity.Note_Edit">
 
     <LinearLayout
         android:layout_width="match_parent"

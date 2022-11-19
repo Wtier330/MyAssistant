@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter;
+package com.example.myapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.myapplication.Activity.Note_Edit;
-import com.example.myapplication.Bean.Note;
+import com.example.myapplication.activity.Note_Edit;
+import com.example.myapplication.bean.Note;
 import com.example.myapplication.R;
 
 import java.util.List;

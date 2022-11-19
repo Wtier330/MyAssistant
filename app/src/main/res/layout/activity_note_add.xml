@@ -7,7 +7,7 @@
     android:orientation="vertical"
     app:backgroundTint="@null"
 
-    tools:context=".Activity.Note_Add">
+    tools:context=".activity.Note_Add">
 
     <LinearLayout
         android:layout_width="match_parent"
