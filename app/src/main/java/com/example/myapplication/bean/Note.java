@@ -23,15 +23,17 @@ public class Note implements Serializable {
     private String id;
     private String title;
     private String content;
-    private Date createTime;
+    private String createTime;
 
     protected String getCreateTimeAsString(String parttern) {
-        SimpleDateFormat s = new SimpleDateFormat(parttern);
+        String s = new SimpleDateFormat(parttern).toString();
         return s.format(this.createTime);
     }
+
     public String getCreateTimeAsString() {
         return getCreateTimeAsString("HH:mm");
     }
+
     public String getCreateDateAsString() {
         return getCreateTimeAsString("YYYY-MM-dd");
     }

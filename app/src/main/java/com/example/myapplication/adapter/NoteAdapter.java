@@ -1,15 +1,20 @@
 package com.example.myapplication.adapter;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.activity.Note_Edit;
 import com.example.myapplication.bean.Note;
 import com.example.myapplication.R;
+import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
+import com.example.myapplication.utils.ToastUtil;
 
 import java.util.List;
 
@@ -20,11 +25,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
     private List<Note> mynotelist;
     private LayoutInflater layoutInflater;
     private Context context;
+    NotepadSqliteOpenHelper notepadSqliteOpenHelper;
 
     public NoteAdapter(Context context, List<Note> mBeanList) {
         this.mynotelist = mBeanList;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
+        notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(context);
+
     }
 
     @NonNull
@@ -35,8 +43,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
         return myNoteViewHolder;
     }
 
+    public void refreshData(List<Note> notes) {
+        this.mynotelist = notes;
+        notifyDataSetChanged();
+    }
+
+
     @Override
-    public void onBindViewHolder(@NonNull MyNoteViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyNoteViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Note note = mynotelist.get(position);
         holder.tvTitle.setText(note.getTitle());
         holder.tvcontent.setText(note.getContent());
@@ -59,9 +73,49 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
          * 删除或者编辑
          * */
         holder.rlcontainer.setOnLongClickListener(new View.OnLongClickListener() {
+
+            private View view;
+
             @Override
             public boolean onLongClick(View v) {
+                //TODO dialog样式未设计
+                Dialog dialog = new Dialog(context);
+                view = layoutInflater.inflate(R.layout.note_list_item_dialog, null);
+                TextView tvdelete = view.findViewById(R.id.note_item_delete);
+                TextView tvedit = view.findViewById(R.id.note_item_edit);
 
+                /*
+                 * 长按删除数据库中的数据
+                 * */
+                tvdelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int row = notepadSqliteOpenHelper.deleteDataFromid(note.getId());
+                        if (row > 0) {
+                            deleteItem(position);
+                            ToastUtil.toastShort(context, "删除成功");
+                        } else {
+                            ToastUtil.toastShort(context, "删除失败");
+                        }
+
+                        dialog.dismiss();
+
+                    }
+                });
+                /*
+                * 长按编辑
+                * */
+                tvedit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, Note_Edit.class);
+                        intent.putExtra("note", note);
+                        context.startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setContentView(view);
+                dialog.show();
                 return false;
             }
         });
@@ -70,6 +124,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
     @Override
     public int getItemCount() {
         return mynotelist.size();
+    }
+
+    public void deleteItem(int pos) {
+        mynotelist.remove(pos);
+        notifyItemRemoved(pos);
     }
 
     class MyNoteViewHolder extends RecyclerView.ViewHolder {

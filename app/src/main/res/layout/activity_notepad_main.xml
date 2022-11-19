@@ -11,7 +11,7 @@
         android:id="@+id/rlv_note"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="add" />
+       />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fbt_note_add"
@@ -20,6 +20,7 @@
         android:layout_gravity="right|bottom"
         android:layout_margin="20dp"
         app:backgroundTint="@color/white"
+        android:onClick="addNote"
         android:background="@drawable/addto" />
 
 

@@ -55,7 +55,7 @@
             android:layout_width="120dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:onClick="add"
+            android:onClick="noteEditsave"
             android:text="保存"
             android:textSize="20dp"
             app:backgroundTint="@color/teal_200" />

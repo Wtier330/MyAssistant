@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,6 +26,7 @@ public class Notepad_Main extends AppCompatActivity {
     private List<Note> mNotes;
     private NotepadSqliteOpenHelper notepadSqliteOpenHelper;
     private NoteAdapter noteAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,33 +44,35 @@ public class Notepad_Main extends AppCompatActivity {
     }
 
     private void DBinit() {
+        notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(this);
         mNotes = new ArrayList<>();
 
-        Note note = Note.builder().title("title1").content("content1").createTime(new Date()).build();
+        Note note = Note.builder().title("title1").content("content1").createTime(new Date().toString()).build();
         mNotes.add(note);
-        /*
-         * 假数据测试代码
-         * */
-        for (int i = 0; i < 29; i++) {
-            Note note1 = Note.builder().title("title1").content("content1").createTime(new Date()).build();
-
-            mNotes.add(note1);
-        }
     }
+//        从数据库中得到数据
+    private List<Note> getDataFromDB() {
+        return notepadSqliteOpenHelper.queryAllFromDB();
 
-    private String getCurrentTimeFormat() {
-        SimpleDateFormat s = new SimpleDateFormat("HH:mm");
-        Date d = new Date();
-        return s.format(d);
     }
-
     private void viewinit() {
         rlv_note = findViewById(R.id.rlv_note);
         fbt_note_add = findViewById(R.id.fbt_note_add);
 
     }
 
-    public void add(View view) {
+    public void addNote(View view) {
+        startActivity(new Intent(this, Note_Add.class));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshDataFromDB();
+    }
+
+    private void refreshDataFromDB() {
+        mNotes = getDataFromDB();
+        noteAdapter.refreshData(mNotes);
     }
 }
