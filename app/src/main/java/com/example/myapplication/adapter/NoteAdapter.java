@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.activity.Note_Edit;
@@ -65,6 +66,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
             Note prevNote = mynotelist.get(position - 1);
             if (!DateUtils.isSameDay(note.getCreateTime(), prevNote.getCreateTime())) {
                 holder.tvdate.setVisibility(View.VISIBLE);
+            } else {
+                LinearLayout linearLayout = ((AppCompatActivity) context).findViewById(R.id.rl_note_item_wrapper);
+                ViewGroup.LayoutParams p = linearLayout.getLayoutParams();
+                p.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                linearLayout.setLayoutParams(p);
             }
         }
 

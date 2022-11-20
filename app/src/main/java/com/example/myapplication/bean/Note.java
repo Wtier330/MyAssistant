@@ -20,7 +20,7 @@ import lombok.ToString;
 @Data
 @Builder
 public class Note implements Serializable {
-    private String id;
+    private int id;
     private String title;
     private String content;
     private Date createTime;

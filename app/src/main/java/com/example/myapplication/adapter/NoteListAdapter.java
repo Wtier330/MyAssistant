@@ -10,13 +10,30 @@ import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.example.myapplication.R;
+import com.example.myapplication.bean.Note;
+import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteListAdapter extends BaseSwipeAdapter {
 
     private Context mContext;
+    private List<Note> noteList = new ArrayList<>();
+
+    NotepadSqliteOpenHelper notepadSqliteOpenHelper;
 
     public NoteListAdapter(Context mContext) {
         this.mContext = mContext;
+        notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(mContext);
+        fetchNoteList();
+    }
+
+    public void fetchNoteList() {
+        noteList = notepadSqliteOpenHelper.queryAllFromDB();
     }
 
     @Override
@@ -27,7 +44,7 @@ public class NoteListAdapter extends BaseSwipeAdapter {
     @Override
     public View generateView(int position, ViewGroup parent) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.note_list_layout, null);
-        SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
+        SwipeLayout swipeLayout = (SwipeLayout) v.findViewById(getSwipeLayoutResourceId(position));
         swipeLayout.addSwipeListener(new SimpleSwipeListener() {
             @Override
             public void onOpen(SwipeLayout layout) {
@@ -49,22 +66,39 @@ public class NoteListAdapter extends BaseSwipeAdapter {
 
     @Override
     public void fillValues(int position, View convertView) {
-        TextView t = (TextView)convertView.findViewById(R.id.tv_note_title);
-        t.setText((position + 1) + ".");
+        Note currentNote = (Note) getItem(position);
+
+        TextView tv_note_title = (TextView) convertView.findViewById(R.id.tv_note_title);
+        TextView tv_note_content = (TextView) convertView.findViewById(R.id.tv_note_content);
+        TextView tv_note_time = (TextView) convertView.findViewById(R.id.tv_note_time);
+        TextView tv_note_date = (TextView) convertView.findViewById(R.id.tv_note_date);
+        tv_note_title.setText(currentNote.getTitle());
+        tv_note_content.setText(StringUtils.abbreviate(currentNote.getContent(), "...", 30));
+        tv_note_time.setText(currentNote.getCreateTimeAsString());
+        tv_note_date.setText(currentNote.getCreateDateAsString());
+
+        if (position == 0) {
+            tv_note_date.setVisibility(View.VISIBLE);
+        } else {
+            Note prevNote = (Note) getItem(position - 1);
+            if (!DateUtils.isSameDay(currentNote.getCreateTime(), prevNote.getCreateTime())) {
+                tv_note_date.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
     public int getCount() {
-        return 50;
+        return noteList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return noteList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return noteList.get(position).getId();
     }
 }
