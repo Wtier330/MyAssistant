@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -26,11 +27,11 @@ import org.apache.commons.lang3.time.DateUtils;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHolder> {
     private List<Note> mynotelist;
     private LayoutInflater layoutInflater;
-    private Notepad_Main context;
+    private Context context;
     NotepadSqliteOpenHelper notepadSqliteOpenHelper;
 
     @SuppressLint("ResourceType")
-    public NoteAdapter(Notepad_Main context, List<Note> mBeanList) {
+    public NoteAdapter(Context context, List<Note> mBeanList) {
         this.mynotelist = mBeanList;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
@@ -49,7 +50,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
         this.mynotelist = notes;
         notifyDataSetChanged();
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull MyNoteViewHolder holder, @SuppressLint("RecyclerView") int position) {
@@ -109,7 +109,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
 
                     Snackbar
                             .make(itemView, "是否删除?", Snackbar.LENGTH_LONG)
-                            .setAnchorView(context.findViewById(R.id.fbt_note_add))
+                            .setAnchorView(((AppCompatActivity) context).findViewById(R.id.fbt_note_add))
                             .setAction("确认", view -> {
                                 int row = notepadSqliteOpenHelper.deleteDataFromid(note.getId());
                                 if (row > 0) {

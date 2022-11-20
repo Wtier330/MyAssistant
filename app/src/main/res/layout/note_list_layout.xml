@@ -1,58 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_note_item_container"
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/note_swipe_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="15dp">
+    android:layout_height="80dp"
+    tools:context=".activity.NoteListActivity"
+    tools:ignore="MissingDefaultResource">
+    <!-- Bottom View Start-->
+    <LinearLayout
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:background="#64B5F6"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <!--What you want to show-->
+        <Button
+            android:id="@+id/btn_note_item_edit"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="#64B5F600"
+            android:text="编辑" />
 
-    <TextView
-        android:id="@+id/tv_note_title"
+        <Button
+            android:id="@+id/btn_note_item_del"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="#EF5350"
+            android:text="删除" />
+
+    </LinearLayout>
+    <!-- Bottom View End-->
+
+    <!-- Surface View Start -->
+    <LinearLayout
+        android:id="@+id/rl_note_item_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/tv_note_time"
-        android:layout_below="@+id/tv_note_date"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="title"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tv_note_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_note_title"
-        android:layout_marginTop="5dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="2"
-        android:text="summary"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_note_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_note_date"
+            android:layout_toLeftOf="@+id/tv_note_time"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_note_time"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_note_title"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="time"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tv_note_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_note_title"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="summary"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_note_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="date"
-        android:visibility="gone"
-        android:textSize="14sp" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_note_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_note_title"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:text="time"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_note_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="date"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <!--What you want to show in SurfaceView-->
+    </LinearLayout>
+    <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:id="@+id/rl_note_item_container"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:padding="15dp">-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_note_title"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_toLeftOf="@+id/tv_note_time"-->
+    <!--        android:layout_below="@+id/tv_note_date"-->
+    <!--        android:ellipsize="end"-->
+    <!--        android:maxLines="1"-->
+    <!--        android:text="title"-->
+    <!--        android:textSize="20sp"-->
+    <!--        android:textStyle="bold" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_note_content"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@+id/tv_note_title"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:ellipsize="end"-->
+    <!--        android:gravity="center"-->
+    <!--        android:maxLines="2"-->
+    <!--        android:text="summary"-->
+    <!--        android:textSize="16sp" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_note_time"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_marginLeft="10dp"-->
+    <!--        android:layout_marginRight="15dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignBottom="@id/tv_note_title"-->
+    <!--        android:layout_alignParentRight="true"-->
+    <!--        android:layout_centerVertical="true"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="time"-->
+    <!--        android:textSize="14sp" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_note_date"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_alignParentLeft="true"-->
+    <!--        android:layout_alignParentRight="true"-->
+    <!--        android:layout_centerVertical="true"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="date"-->
+    <!--        android:visibility="gone"-->
+    <!--        android:textSize="14sp" />-->
+    <!--</RelativeLayout>-->
 

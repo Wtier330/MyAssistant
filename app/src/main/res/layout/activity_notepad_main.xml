@@ -7,7 +7,7 @@
     android:background="@drawable/notebg"
     tools:context=".activity.Notepad_Main">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <GridView
         android:id="@+id/rlv_note"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
