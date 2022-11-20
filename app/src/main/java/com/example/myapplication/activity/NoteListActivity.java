@@ -50,12 +50,8 @@ public class NoteListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        refreshDataFromDB();
-    }
-
-    private void refreshDataFromDB() {
-//        mNotes = notepadSqliteOpenHelper.queryAllFromDB();
-//        noteAdapter.refreshData(mNotes);
+        // TODO 新增时可能会出现列表按日期分组错误的情况
+        noteAdapter.fetchNoteList();
     }
 
 }
