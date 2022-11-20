@@ -54,7 +54,7 @@ public class Note_Edit extends AppCompatActivity {
 //        Note note = Note.builder().title(title).content(content).createTime(new Date().toString()).build();
         note.setTitle(title);
         note.setContent(content);
-        note.setCreateTime(new TimeUtil().getCreateTimeAsString());
+        note.setUpdateTime(new Date());
         long row = notepadSqliteOpenHelper.updateDate(note);
         if (row != -1){
             ToastUtil.toastShort(this,"修改成功!");

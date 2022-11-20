@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.example.myapplication.bean.Note;
 import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,9 +38,11 @@ public class Notepad_Main extends AppCompatActivity {
         Eventinit();
     }
 
+    @SuppressLint("ResourceType")
     private void Eventinit() {
         noteAdapter = new NoteAdapter(this, mNotes);
         rlv_note.setAdapter(noteAdapter);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rlv_note.setLayoutManager(linearLayoutManager);
     }
@@ -46,19 +50,18 @@ public class Notepad_Main extends AppCompatActivity {
     private void DBinit() {
         notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(this);
         mNotes = new ArrayList<>();
-
-        Note note = Note.builder().title("title1").content("content1").createTime(new Date().toString()).build();
-        mNotes.add(note);
+//        Note note = Note.builder().title("title1").content("content1").createTime(new Date()).build();
+//        mNotes.add(note);
     }
-//        从数据库中得到数据
+
+    //        从数据库中得到数据
     private List<Note> getDataFromDB() {
         return notepadSqliteOpenHelper.queryAllFromDB();
-
     }
+
     private void viewinit() {
         rlv_note = findViewById(R.id.rlv_note);
         fbt_note_add = findViewById(R.id.fbt_note_add);
-
     }
 
     public void addNote(View view) {

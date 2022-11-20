@@ -7,32 +7,34 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.activity.Note_Edit;
+import com.example.myapplication.activity.Notepad_Main;
 import com.example.myapplication.bean.Note;
 import com.example.myapplication.R;
 import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
-import com.example.myapplication.utils.ToastUtil;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHolder> {
     private List<Note> mynotelist;
     private LayoutInflater layoutInflater;
-    private Context context;
+    private Notepad_Main context;
     NotepadSqliteOpenHelper notepadSqliteOpenHelper;
 
-    public NoteAdapter(Context context, List<Note> mBeanList) {
+    @SuppressLint("ResourceType")
+    public NoteAdapter(Notepad_Main context, List<Note> mBeanList) {
         this.mynotelist = mBeanList;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(context);
-
     }
 
     @NonNull
@@ -56,6 +58,16 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
         holder.tvcontent.setText(note.getContent());
         holder.tvtime.setText(note.getCreateTimeAsString());
         holder.tvdate.setText(note.getCreateDateAsString());
+
+        if (position == 0) {
+            holder.tvdate.setVisibility(View.VISIBLE);
+        } else {
+            Note prevNote = mynotelist.get(position - 1);
+            if (!DateUtils.isSameDay(note.getCreateTime(), prevNote.getCreateTime())) {
+                holder.tvdate.setVisibility(View.VISIBLE);
+            }
+        }
+
         /*
          * 在点击列表的item条目的时候，能够进行跳转
          * 将note参数进行一个传递
@@ -72,49 +84,52 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
          * 长按弹出弹窗
          * 删除或者编辑
          * */
-        holder.rlcontainer.setOnLongClickListener(new View.OnLongClickListener() {
 
-            private View view;
+
+        holder.rlcontainer.setOnLongClickListener(new View.OnLongClickListener() {
+            private View dialogView;
+            private View itemView;
 
             @Override
             public boolean onLongClick(View v) {
+                itemView = holder.itemView;
                 //TODO dialog样式未设计
                 Dialog dialog = new Dialog(context);
-                view = layoutInflater.inflate(R.layout.note_list_item_dialog, null);
-                TextView tvdelete = view.findViewById(R.id.note_item_delete);
-                TextView tvedit = view.findViewById(R.id.note_item_edit);
+
+                dialogView = layoutInflater.inflate(R.layout.note_list_item_dialog, null);
+
+                TextView tvdelete = dialogView.findViewById(R.id.note_item_delete);
+                TextView tvedit = dialogView.findViewById(R.id.note_item_edit);
 
                 /*
                  * 长按删除数据库中的数据
                  * */
-                tvdelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int row = notepadSqliteOpenHelper.deleteDataFromid(note.getId());
-                        if (row > 0) {
-                            deleteItem(position);
-                            ToastUtil.toastShort(context, "删除成功");
-                        } else {
-                            ToastUtil.toastShort(context, "删除失败");
-                        }
+                tvdelete.setOnClickListener(v1 -> {
+                    dialog.dismiss();
 
-                        dialog.dismiss();
-
-                    }
+                    Snackbar
+                            .make(itemView, "是否删除?", Snackbar.LENGTH_LONG)
+                            .setAnchorView(context.findViewById(R.id.fbt_note_add))
+                            .setAction("确认", view -> {
+                                int row = notepadSqliteOpenHelper.deleteDataFromid(note.getId());
+                                if (row > 0) {
+                                    deleteItem(position);
+                                    Snackbar.make(itemView, "删除成功", Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    Snackbar.make(itemView, "删除失败", Snackbar.LENGTH_SHORT).show();
+                                }
+                            }).show();
                 });
                 /*
-                * 长按编辑
-                * */
-                tvedit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context, Note_Edit.class);
-                        intent.putExtra("note", note);
-                        context.startActivity(intent);
-                        dialog.dismiss();
-                    }
+                 * 长按编辑
+                 * */
+                tvedit.setOnClickListener(v12 -> {
+                    Intent intent = new Intent(context, Note_Edit.class);
+                    intent.putExtra("note", note);
+                    context.startActivity(intent);
+                    dialog.dismiss();
                 });
-                dialog.setContentView(view);
+                dialog.setContentView(dialogView);
                 dialog.show();
                 return false;
             }

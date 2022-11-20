@@ -6,33 +6,110 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <Button
-        android:id="@+id/bt_notepad"
-        android:layout_width="148dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="93dp"
-        android:layout_marginBottom="510dp"
-        android:gravity="center"
-        android:text="记事本"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <!--    <Button-->
+    <!--        android:id="@+id/bt_notepad"-->
+    <!--        android:layout_width="148dp"-->
+    <!--        android:layout_height="65dp"-->
+    <!--        android:layout_marginStart="92dp"-->
+    <!--        android:layout_marginBottom="510dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="记事本"-->
+    <!--        android:textSize="20dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:layout_marginBottom="75dp"
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="26dp"-->
+    <!--        android:layout_marginBottom="75dp"-->
 
-        android:gravity="center"
-        android:text="生活工具盒"
-        android:textSize="45dp"
-        app:layout_constraintBottom_toTopOf="@+id/bt_notepad"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+    <!--        android:gravity="center"-->
+    <!--        android:text="生活工具盒"-->
+    <!--        android:textSize="45dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/bt_notepad"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.038" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="224dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:ignore="MissingConstraints,Suspicious0dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="224dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bt_notepad"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="#0084FF"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/notepad_bg" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:letterSpacing="0.2"
+                    android:shadowColor="#9E9E9E "
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:text="笔记本"
+                    android:textColor="#EEEEEE"
+                    android:textSize="20dp" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:ignore="MissingConstraints,Suspicious0dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="224dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/notepad_bg"
+                app:cardBackgroundColor="#0084FF"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

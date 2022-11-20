@@ -42,7 +42,7 @@ public class Note_Add extends AppCompatActivity {
             ToastUtil.toastShort(this, "标题不能为空!");
             return;
         }
-        Note note = Note.builder().title(title).content(content).createTime(new Date().toString()).build();
+        Note note = Note.builder().title(title).content(content).createTime(new Date()).build();
         Long row = notepadSqliteOpenHelper.insertData(note);
         if (row != -1){
             ToastUtil.toastShort(this,"添加成功!");
