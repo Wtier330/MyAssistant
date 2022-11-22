@@ -1,12 +1,16 @@
 package com.example.myapplication.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.myapplication.adapter.NoteAdapter;
@@ -14,11 +18,8 @@ import com.example.myapplication.bean.Note;
 import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
 import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Notepad_Main extends AppCompatActivity {
@@ -42,7 +43,6 @@ public class Notepad_Main extends AppCompatActivity {
     private void Eventinit() {
         noteAdapter = new NoteAdapter(this, mNotes);
         rlv_note.setAdapter(noteAdapter);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rlv_note.setLayoutManager(linearLayoutManager);
     }
@@ -77,5 +77,40 @@ public class Notepad_Main extends AppCompatActivity {
     private void refreshDataFromDB() {
         mNotes = getDataFromDB();
         noteAdapter.refreshData(mNotes);
+    }
+
+    /*
+     * 创建菜单
+     * */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_note_main, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu_note_search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mNotes = notepadSqliteOpenHelper.quearyFromDbByTitle(newText);
+                noteAdapter.refreshData(mNotes);
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /*
+     * 选中菜单
+     * */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+
     }
 }

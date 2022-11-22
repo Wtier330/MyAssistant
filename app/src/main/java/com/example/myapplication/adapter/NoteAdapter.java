@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.activity.Note_Edit;
@@ -19,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -26,11 +28,11 @@ import org.apache.commons.lang3.time.DateUtils;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHolder> {
     private List<Note> mynotelist;
     private LayoutInflater layoutInflater;
-    private Notepad_Main context;
+    private Context context;
     NotepadSqliteOpenHelper notepadSqliteOpenHelper;
 
     @SuppressLint("ResourceType")
-    public NoteAdapter(Notepad_Main context, List<Note> mBeanList) {
+    public NoteAdapter(Context context, List<Note> mBeanList) {
         this.mynotelist = mBeanList;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
@@ -50,7 +52,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
         notifyDataSetChanged();
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull MyNoteViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Note note = mynotelist.get(position);
@@ -65,6 +66,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
             Note prevNote = mynotelist.get(position - 1);
             if (!DateUtils.isSameDay(note.getCreateTime(), prevNote.getCreateTime())) {
                 holder.tvdate.setVisibility(View.VISIBLE);
+            } else {
+                LinearLayout linearLayout = ((AppCompatActivity) context).findViewById(R.id.rl_note_item_wrapper);
+                ViewGroup.LayoutParams p = linearLayout.getLayoutParams();
+                p.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                linearLayout.setLayoutParams(p);
             }
         }
 
@@ -93,9 +99,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
             @Override
             public boolean onLongClick(View v) {
                 itemView = holder.itemView;
-                //TODO dialog样式未设计
-                Dialog dialog = new Dialog(context);
-
+                Dialog dialog = new Dialog(context, android.R.style.ThemeOverlay_Material_Dialog_Alert);
                 dialogView = layoutInflater.inflate(R.layout.note_list_item_dialog, null);
 
                 TextView tvdelete = dialogView.findViewById(R.id.note_item_delete);
@@ -109,7 +113,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyNoteViewHold
 
                     Snackbar
                             .make(itemView, "是否删除?", Snackbar.LENGTH_LONG)
-                            .setAnchorView(context.findViewById(R.id.fbt_note_add))
+                            .setAnchorView(((AppCompatActivity) context).findViewById(R.id.fbt_note_add))
                             .setAction("确认", view -> {
                                 int row = notepadSqliteOpenHelper.deleteDataFromid(note.getId());
                                 if (row > 0) {

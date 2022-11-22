@@ -99,6 +99,7 @@
             tools:layout_editor_absoluteY="224dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_lab"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:background="@drawable/notepad_bg"
@@ -107,6 +108,20 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_lab_swipe"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/notepad_bg"
+                app:cardBackgroundColor="#0084FF"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
