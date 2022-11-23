@@ -8,6 +8,7 @@
         android:id="@+id/note_item_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="删除"
         android:textSize="18dp" />
 
@@ -16,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="编辑"
+        android:gravity="center"
 
         android:textSize="18dp" />
 

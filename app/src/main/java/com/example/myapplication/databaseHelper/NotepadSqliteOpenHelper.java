@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 
 import com.example.myapplication.bean.Note;
 
@@ -92,6 +93,29 @@ public class NotepadSqliteOpenHelper extends SQLiteOpenHelper {
     public int deleteDataFromid(int id) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(NOTE_TABLE_NAME, "id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public List<Note> quearyFromDbByTitle(String title) {
+        if (TextUtils.isEmpty(title)) {        //判空，不输入则查询所有
+            return queryAllFromDB();
+        }
+        SQLiteDatabase db = getWritableDatabase();
+        List<Note> noteList = new ArrayList<>();
+        Cursor cursor = db.query(NOTE_TABLE_NAME, null, "title like ?", new String[]{"%" + title + "%"}, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
+                @SuppressLint("Range") String title2 = cursor.getString(cursor.getColumnIndex("title"));
+                @SuppressLint("Range") String content = cursor.getString(cursor.getColumnIndex("content"));
+                @SuppressLint("Range") Long createTimestamp = cursor.getLong(cursor.getColumnIndex("create_time"));
+                @SuppressLint("Range") Long updateTimestamp = cursor.getLong(cursor.getColumnIndex("update_time"));
+                Note note = Note.builder().id(id).title(title2).content(content).createTime(new Date(createTimestamp)).updateTime(new Date(updateTimestamp)).build();
+                noteList.add(note);
+            }
+        }
+        cursor.close();
+        db.close();
+        return noteList;
     }
 }
 
