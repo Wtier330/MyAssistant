@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:clickable="true"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/notepad_bg"
                 app:cardBackgroundColor="#0084FF"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
