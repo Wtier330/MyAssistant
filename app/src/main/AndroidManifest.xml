@@ -11,9 +11,9 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".activity.Note_Edit"
+            android:exported="false"
             android:label="编辑记事"
             android:parentActivityName=".activity.Notepad_Main" />
-            android:exported="false" />
         <activity
             android:name=".activity.Note_Add"
             android:exported="false"
@@ -22,14 +22,12 @@
         <activity
             android:name=".activity.Notepad_Main"
             android:exported="false"
-            android:label="记事本列表主界面"
-            />
+            android:label="记事本列表主界面" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
