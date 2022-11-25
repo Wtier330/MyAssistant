@@ -22,7 +22,8 @@
         <activity
             android:name=".activity.Notepad_Main"
             android:exported="false"
-            android:label="记事本列表主界面" />
+            android:label="记事本列表主界面"
+            />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
