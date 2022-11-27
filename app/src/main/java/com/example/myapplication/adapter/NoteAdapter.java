@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.activity.Note_Edit;
 import com.example.myapplication.activity.Notepad_Main;
 import com.example.myapplication.bean.Note;
 import com.example.myapplication.R;
 import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
+import com.example.myapplication.utils.ViewUtil;
+import com.example.myapplication.view.LeftSlideView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -26,7 +29,7 @@ import lombok.Setter;
 
 import org.apache.commons.lang3.time.DateUtils;
 
-public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements LeftSlideView.IonSlidingButtonListener {
     private List<Note> mynotelist;
     private LayoutInflater layoutInflater;
     private Context context;
@@ -36,12 +39,18 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static int TYPE_LINEAR_LAYOUT = 0;
     public static int TYPE_GRID_LAYOUT = 1;
 
+    private IonSlidingViewClickListener mIDeleteBtnClickListener;
+    private IonSlidingViewClickListener mISetBtnClickListener;
+    private LeftSlideView mMenu = null;
+
     @SuppressLint("ResourceType")
     public NoteAdapter(Context context, List<Note> mBeanList) {
         this.mynotelist = mBeanList;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(context);
+        mIDeleteBtnClickListener = (IonSlidingViewClickListener) context;
+        mISetBtnClickListener = (IonSlidingViewClickListener) context;
     }
 
     @Override
@@ -81,6 +90,45 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         if (holder instanceof MyNoteViewHolder) {
             onBindLLViewHolder((MyNoteViewHolder) holder, position);
+            //            ((MyNoteViewHolder) holder).textView.setText(note);
+//            设置内容布局的宽为屏幕宽度
+            ((MyNoteViewHolder) holder).layout_content.getLayoutParams().width = ViewUtil.getScreenWidth(context);
+
+            //item正文点击事件
+            ((MyNoteViewHolder) holder).textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //判断是否有删除菜单打开
+                    if (menuIsOpen()) {
+                        closeMenu();//关闭菜单
+                    } else {
+                        int n = holder.getLayoutPosition();
+                        mIDeleteBtnClickListener.onItemClick(v, n);
+                    }
+
+                }
+            });
+
+
+            //左滑设置点击事件
+            ((MyNoteViewHolder) holder).btn_Set.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int n = holder.getLayoutPosition();
+                    mISetBtnClickListener.onSetBtnCilck(view, n);
+                }
+            });
+
+
+            //左滑删除点击事件
+            ((MyNoteViewHolder) holder).btn_Delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int n = holder.getLayoutPosition();
+                    mIDeleteBtnClickListener.onDeleteBtnCilck(view, n);
+                }
+            });
         } else if (holder instanceof MyNoteGridViewHolder) {
             onBindGridViewHolder((MyNoteGridViewHolder) holder, position);
         }
@@ -275,6 +323,10 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * 列表布局适配器
      * */
     class MyNoteViewHolder extends RecyclerView.ViewHolder {
+        public TextView btn_Set;
+        public TextView btn_Delete;
+        public TextView textView;
+        public ViewGroup layout_content;
         TextView tvTitle;
         TextView tvcontent;
         TextView tvtime;
@@ -283,26 +335,90 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public MyNoteViewHolder(@NonNull View itemView) {
             super(itemView);
+            btn_Set = (TextView) itemView.findViewById(R.id.tv_set);
+            btn_Delete = (TextView) itemView.findViewById(R.id.tv_delete);
+            textView = (TextView) itemView.findViewById(R.id.text);
+            layout_content = (ViewGroup) itemView.findViewById(R.id.layout_content);
             this.rlcontainer = itemView.findViewById(R.id.rl_note_item_container);
             this.tvTitle = itemView.findViewById(R.id.tv_note_title);
             this.tvcontent = itemView.findViewById(R.id.tv_note_content);
             this.tvtime = itemView.findViewById(R.id.tv_note_time);
             this.tvdate = itemView.findViewById(R.id.tv_note_date);
+            ((LeftSlideView) itemView).setSlidingButtonListener(NoteAdapter.this);
+
         }
+    }
+
+    /**
+     * 删除item
+     *
+     * @param position
+     */
+    public void removeData(int position) {
+        mynotelist.remove(position);
+        notifyItemRemoved(position);
+        Toast.makeText(context.getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * 删除菜单打开信息接收
+     */
+    @Override
+    public void onMenuIsOpen(View view) {
+        mMenu = (LeftSlideView) view;
+    }
+
+
+    /**
+     * 滑动或者点击了Item监听
+     *
+     * @param leftSlideView
+     */
+    @Override
+    public void onDownOrMove(LeftSlideView leftSlideView) {
+        if (menuIsOpen()) {
+            if (mMenu != leftSlideView) {
+                closeMenu();
+            }
+        }
+    }
+
+    /**
+     * 关闭菜单
+     */
+    public void closeMenu() {
+        mMenu.closeMenu();
+        mMenu = null;
+
+    }
+
+    /**
+     * 判断菜单是否打开
+     *
+     * @return
+     */
+    public Boolean menuIsOpen() {
+        if (mMenu != null) {
+            return true;
+        }
+        return false;
     }
 
     /*
      * 网格布局适配器
      * */
     class MyNoteGridViewHolder extends RecyclerView.ViewHolder {
+
         TextView tvTitle;
         TextView tvcontent;
         TextView tvtime;
         TextView tvdate;
         ViewGroup rlcontainer;
 
-        public MyNoteGridViewHolder(@NonNull View itemView) {
+        public MyNoteGridViewHolder(View itemView) {
             super(itemView);
+
             this.rlcontainer = itemView.findViewById(R.id.rl_note_item_container);
             this.tvTitle = itemView.findViewById(R.id.tv_note_title);
             this.tvcontent = itemView.findViewById(R.id.tv_note_content);
@@ -311,4 +427,14 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    /**
+     * 注册接口的方法：点击事件。在Mactivity.java实现这些方法。
+     */
+    public interface IonSlidingViewClickListener {
+        void onItemClick(View view, int position);//点击item正文
+
+        void onDeleteBtnCilck(View view, int position);//点击“删除”
+
+        void onSetBtnCilck(View view, int position);//点击“设置”
+    }
 }

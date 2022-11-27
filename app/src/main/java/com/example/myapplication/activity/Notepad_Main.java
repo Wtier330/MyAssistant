@@ -3,6 +3,7 @@ package com.example.myapplication.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.Toast;
 
 import com.example.myapplication.adapter.NoteAdapter;
 import com.example.myapplication.bean.Note;
@@ -21,11 +24,12 @@ import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
 import com.example.myapplication.R;
 import com.example.myapplication.utils.SpfUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notepad_Main extends AppCompatActivity {
+public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSlidingViewClickListener {
 
     RecyclerView rlv_note;
     FloatingActionButton fbt_note_add;
@@ -64,6 +68,7 @@ public class Notepad_Main extends AppCompatActivity {
     private void Eventinit() {
         noteAdapter = new NoteAdapter(this, mNotes);
         rlv_note.setAdapter(noteAdapter);
+        rlv_note.setItemAnimator(new DefaultItemAnimator());
         setToLL();
     }
 
@@ -179,4 +184,55 @@ public class Notepad_Main extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * item正文的点击事件
+     *
+     * @param view
+     * @param position
+     */
+    @Override
+    public void onItemClick(View view, int position) {
+        //点击item正文的代码逻辑
+        Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * item的左滑编辑
+     *
+     * @param view
+     * @param position
+     */
+    @Override
+    public void onSetBtnCilck(View view, int position) {
+        Note note = mNotes.get(position);
+        Intent intent = new Intent(getApplicationContext(), Note_Edit.class);
+        intent.putExtra("note", note);
+        startActivity(intent);
+        //“设置”点击事件的代码逻辑
+        Toast.makeText(Notepad_Main.this, "请设置", Toast.LENGTH_LONG).show();
+    }
+
+
+    /**
+     * item的左滑删除
+     * 此处该方法已经进行item更新，不需要重复取值导致越界
+     *
+     * @param view
+     * @param position
+     */
+    @Override
+    public void onDeleteBtnCilck(View view, int position) {
+        Note note = mNotes.get(position);
+        noteAdapter.removeData(position);
+        int row = notepadSqliteOpenHelper.deleteDataFromid(note.getId());
+        if (row > 0) {
+            Toast.makeText(getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "删除失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }

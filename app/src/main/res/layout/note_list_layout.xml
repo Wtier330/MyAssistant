@@ -1,113 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/note_swipe_layout"
+
+<!--item布局，自定义View-->
+<com.example.myapplication.view.LeftSlideView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    tools:context=".activity.NoteListActivity"
-    tools:ignore="MissingDefaultResource">
-    <!-- Bottom View Start-->
-    <LinearLayout
-        android:layout_width="160dp"
-        android:layout_height="80dp"
-        android:background="#64B5F6"
-        android:orientation="horizontal"
-        android:weightSum="1">
-        <!--What you want to show-->
-        <Button
-            android:id="@+id/btn_note_item_edit"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="#64B5F600"
-            android:text="编辑" />
+    android:background="@android:color/white"
+    android:layout_marginBottom="1dp">
 
-        <Button
-            android:id="@+id/btn_note_item_del"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="#EF5350"
-            android:text="删除" />
 
-    </LinearLayout>
-    <!-- Bottom View End-->
-
-    <!-- Surface View Start -->
-    <LinearLayout
-        android:id="@+id/rl_note_item_container"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
+
+
+        <!--"设置"，"删除"按钮使用了TextView而不是Button，是因为５.０以上版本使用Button会显示在上层产出错误显示-->
+        <TextView
+            android:id="@+id/tv_set"
+            android:layout_height="106dp"
+            android:layout_width="80dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/layout_content"
+            android:text="编 辑"
+            android:textSize="25dp"
+            android:background="@drawable/orange_background"
+            android:textColor="#DDFFFFFF"
+            />
+
 
         <TextView
-            android:id="@+id/tv_note_date"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:color/transparent"
+            android:id="@+id/tv_delete"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
             android:gravity="center"
-            android:text="2010-01-01"
-            android:visibility="gone"/>
+            android:layout_toRightOf="@+id/tv_set"
+            android:text="删 除"
+            android:textSize="25dp"
+            android:background="@drawable/pink_background"
+            android:textColor="#DDFFFFFF"
+            />
 
-        <LinearLayout
-            android:id="@+id/rl_note_item_wrapper"
+
+
+        <RelativeLayout
+            android:id="@+id/layout_content"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="#ffffff"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <RelativeLayout
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/text"
+                android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:textSize="50dp"
+                android:textColor="#dde65b05"
+                android:background="@drawable/white_background"
+                />
+            <!-- Bottom View Start-->
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:background="#64B5F6"
+                android:orientation="horizontal"
+                android:weightSum="1">
+                <!--What you want to show-->
+                <Button
+                    android:id="@+id/btn_note_item_edit"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#64B5F600"
+                    android:text="编辑" />
+
+                <Button
+                    android:id="@+id/btn_note_item_del"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="#EF5350"
+                    android:text="删除" />
+
+            </LinearLayout>
+            <!-- Bottom View End-->
+
+            <!-- Surface View Start -->
+            <LinearLayout
+                android:id="@+id/rl_note_item_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/rl_note_item_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_note_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@+id/tv_note_time"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="title"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_note_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="@id/tv_note_title"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="00:00:00"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_note_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_note_title"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="summary"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tv_note_title"
+                    android:id="@+id/tv_note_date"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@+id/tv_note_time"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="title"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_note_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="@id/tv_note_title"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="00:00:00"
-                    android:textSize="14sp" />
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="2010-01-01"
+                    android:visibility="gone" />
+                <!--What you want to show in SurfaceView-->
 
-            </RelativeLayout>
+            </LinearLayout>
+            <!-- Surface View End -->
+        </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_note_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_note_title"
-                android:layout_marginTop="5dp"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="2"
-                android:text="summary"
-                android:textSize="16sp" />
 
-        </LinearLayout>
-        <!--What you want to show in SurfaceView-->
 
-    </LinearLayout>
-    <!-- Surface View End -->
-</com.daimajia.swipe.SwipeLayout>
+    </RelativeLayout>
+</com.example.myapplication.view.LeftSlideView>

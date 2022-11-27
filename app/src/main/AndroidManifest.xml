@@ -31,10 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.NoteListActivity"
-            android:exported="false"
-            android:label="实验室/滑动式笔记本" />
     </application>
 
 </manifest>
