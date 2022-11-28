@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".activity.Weather_Main"
+            android:exported="false"
+            android:label="天气主界面"
+            android:parentActivityName=".activity.Weather_Main" />
+        <activity
             android:name=".activity.Note_Edit"
             android:exported="false"
             android:label="编辑记事"
@@ -28,9 +33,11 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

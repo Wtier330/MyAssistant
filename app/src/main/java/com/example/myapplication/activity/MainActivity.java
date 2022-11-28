@@ -6,11 +6,9 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+
 
 import com.example.myapplication.R;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
@@ -28,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //控件初始化
     private void viewinit() {
         CardView bt_notepad = findViewById(R.id.bt_notepad);
+        CardView bt_weather = findViewById(R.id.bt_weather);
+        SetOnClickListener(bt_weather);
         SetOnClickListener(bt_notepad);
     }
 
@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.bt_notepad:
                 startActivity(new Intent(getApplicationContext(), Notepad_Main.class));
+                break;
+            case R.id.bt_weather:
+                startActivity(new Intent(getApplicationContext(), Weather_Main.class));
                 break;
         }
     }
