@@ -17,7 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.bean.Weather;
 import com.example.myapplication.utils.WeatherNetUtil;
+import com.google.gson.Gson;
 
 public class Weather_Main extends AppCompatActivity {
 
@@ -31,9 +33,13 @@ public class Weather_Main extends AppCompatActivity {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 0){
+            if (msg.what == 0) {
                 String weather = (String) msg.obj;
-                Log.d("awa","----主线程收到天气数据-weather----"+weather);
+                Log.d("awa", "----主线程收到天气数据-weather----" + weather);
+                Gson gson = new Gson();
+                Weather w = gson.fromJson(weather, Weather.class);
+                Log.d("awa", "----解析后的数据-w----" + w.toString());
+
             }
         }
     };

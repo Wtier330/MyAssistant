@@ -8,7 +8,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+/*
+* 免费七天API
+* http://www.tianqiapi.com/index/doc?version=v1
+* */
 public class WeatherNetUtil {
     public static final String URL_WEATHER_WITH_FUTURE = "https://tianqiapi.com/api?version=v1&appid=36646344&appsecret=c1lgQbP9";
 
