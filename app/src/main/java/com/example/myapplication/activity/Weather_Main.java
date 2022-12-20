@@ -2,6 +2,7 @@ package com.example.myapplication.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.WeatherFutherAdapter;
 import com.example.myapplication.bean.DayWeather;
 import com.example.myapplication.bean.Weather;
 import com.example.myapplication.utils.WeatherNetUtil;
@@ -33,6 +35,7 @@ public class Weather_Main extends AppCompatActivity {
     private TextView tv_weather_temp, tv_weather_info, tv_weather_temp_max_min, tv_weather_win, tv_weather_air;
     private ImageView iv_weather_show;
     private RecyclerView rlv_weather_future;
+    private WeatherFutherAdapter futherrlvAdapter;
     private Handler handler = new Handler(Looper.myLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -68,10 +71,14 @@ public class Weather_Main extends AppCompatActivity {
         tv_weather_win.setText(todayWeather.getWin()[0] + todayWeather.getWinSpeed());
         tv_weather_air.setText("空气" + todayWeather.getAir() + todayWeather.getAirLevel() + "\n" + todayWeather.getAirTips());
         iv_weather_show.setImageResource(getImageResOfWeather(todayWeather.getWeaImg()));
-
+        dayWeathers.remove(0);//除去当天的天气
+        futherrlvAdapter = new WeatherFutherAdapter(this,dayWeathers);
+        rlv_weather_future.setAdapter(futherrlvAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        rlv_weather_future.setLayoutManager(linearLayoutManager);
     }
 
-    private int getImageResOfWeather(String weaStr) {
+    public int getImageResOfWeather(String weaStr) {
 //xue、lei、shachen、wu、bingbao、yun、yu、yin、qing
         int result = 0;
         switch (weaStr) {
@@ -144,7 +151,6 @@ public class Weather_Main extends AppCompatActivity {
             }
         });
     }
-    //111
     /**
      * 天气城市
      *

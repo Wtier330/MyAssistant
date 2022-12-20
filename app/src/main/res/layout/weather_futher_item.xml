@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="250dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:background="@drawable/biz_plugin_weather_shenzhen_bg">
+
+    <ImageView
+        android:id="@+id/weather_item_show"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/biz_plugin_weather_yin" />
+
+    <TextView
+        android:id="@+id/weather_item_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        tools:text="11" />
+
+    <TextView
+        android:id="@+id/weather_item_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="阴转多云" />
+
+    <TextView
+        android:id="@+id/weather_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="(2022-11-29星期二)" />
+
+    <TextView
+        android:id="@+id/weather_item_temp_max_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="10℃~20℃" />
+
+    <TextView
+        android:id="@+id/weather_item_win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="南风3~4级" />
+
+    <TextView
+        android:id="@+id/weather_item_air"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="空气: 57良" />
+</LinearLayout>
