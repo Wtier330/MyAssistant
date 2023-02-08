@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import okhttp3.OkHttpClient;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,9 +73,9 @@ public class Weather_Main extends AppCompatActivity {
         tv_weather_air.setText("空气" + todayWeather.getAir() + todayWeather.getAirLevel() + "\n" + todayWeather.getAirTips());
         iv_weather_show.setImageResource(getImageResOfWeather(todayWeather.getWeaImg()));
         dayWeathers.remove(0);//除去当天的天气
-        futherrlvAdapter = new WeatherFutherAdapter(this,dayWeathers);
+        futherrlvAdapter = new WeatherFutherAdapter(this, dayWeathers);
         rlv_weather_future.setAdapter(futherrlvAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         rlv_weather_future.setLayoutManager(linearLayoutManager);
     }
 
@@ -151,6 +152,7 @@ public class Weather_Main extends AppCompatActivity {
             }
         });
     }
+
     /**
      * 天气城市
      *
