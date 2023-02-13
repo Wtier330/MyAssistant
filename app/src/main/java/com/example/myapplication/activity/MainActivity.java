@@ -27,8 +27,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void viewinit() {
         CardView bt_notepad = findViewById(R.id.bt_notepad);
         CardView bt_weather = findViewById(R.id.bt_weather);
+        CardView bt_weeklyreport= findViewById(R.id.bt_weeklyreport);
+
         SetOnClickListener(bt_weather);
         SetOnClickListener(bt_notepad);
+        SetOnClickListener(bt_weeklyreport);
     }
 
     //点击事件
@@ -40,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_weather:
                 startActivity(new Intent(getApplicationContext(), Weather_Main.class));
+                break;
+            case R.id.bt_weeklyreport:
+                startActivity(new Intent(getApplicationContext(), WeeklyReport.class));
                 break;
         }
     }
