@@ -11,20 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.example.myapplication.adapter.NoteAdapter;
 import com.example.myapplication.bean.Note;
 import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
 import com.example.myapplication.R;
-import com.example.myapplication.utils.SpfUtil;
+import com.example.myapplication.utils.NoteSpfUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +118,7 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
     }
 
     private void setLayout() {
-        currentListLayoutMode = SpfUtil.getIntWithDefault(this, KEY_NOTE_LAYOUT_MODE, NoteAdapter.TYPE_LINEAR_LAYOUT);
+        currentListLayoutMode = NoteSpfUtil.getIntWithDefault(this, KEY_NOTE_LAYOUT_MODE, NoteAdapter.TYPE_LINEAR_LAYOUT);
         if (currentListLayoutMode == NoteAdapter.TYPE_LINEAR_LAYOUT) {
             setToLL();
         } else if (currentListLayoutMode == NoteAdapter.TYPE_GRID_LAYOUT) {
@@ -171,12 +168,12 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
             case R.id.menu_note_linear:
                 setToLL();
                 currentListLayoutMode = NoteAdapter.TYPE_LINEAR_LAYOUT;
-                SpfUtil.saveInt(this, KEY_NOTE_LAYOUT_MODE, currentListLayoutMode);
+                NoteSpfUtil.saveInt(this, KEY_NOTE_LAYOUT_MODE, currentListLayoutMode);
                 return true;
             case R.id.menu_note_grid:
                 setToGL();
                 currentListLayoutMode = NoteAdapter.TYPE_GRID_LAYOUT;
-                SpfUtil.saveInt(this, KEY_NOTE_LAYOUT_MODE, currentListLayoutMode);
+                NoteSpfUtil.saveInt(this, KEY_NOTE_LAYOUT_MODE, currentListLayoutMode);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

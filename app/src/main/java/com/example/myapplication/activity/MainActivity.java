@@ -9,8 +9,10 @@ import android.view.View;
 
 
 import com.example.myapplication.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +27,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //控件初始化
     private void viewinit() {
+        FloatingActionButton fbtMainSetting = (FloatingActionButton) findViewById(R.id.fbt_main_setting);
         CardView bt_notepad = findViewById(R.id.bt_notepad);
         CardView bt_weather = findViewById(R.id.bt_weather);
-        CardView bt_weeklyreport= findViewById(R.id.bt_weeklyreport);
+        CardView bt_weeklyreport = findViewById(R.id.bt_weeklyreport);
 
         SetOnClickListener(bt_weather);
         SetOnClickListener(bt_notepad);
         SetOnClickListener(bt_weeklyreport);
+
     }
 
     //点击事件
@@ -48,5 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(getApplicationContext(), WeeklyReport.class));
                 break;
         }
+    }
+
+    public void settingMain(View view) {
+
     }
 }

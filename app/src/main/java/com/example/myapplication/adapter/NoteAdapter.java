@@ -134,7 +134,9 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         }
 
     }
-
+/*
+*绑定线性布局
+* */
     private void onBindLLViewHolder(@NonNull MyNoteViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Note note = mynotelist.get(position);
         holder.tvTitle.setText(note.getTitle());
@@ -221,7 +223,9 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             }
         });
     }
-
+/*
+* 绑定表格布局
+* */
     private void onBindGridViewHolder(@NonNull MyNoteGridViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Note note = mynotelist.get(position);
         holder.tvTitle.setText(note.getTitle());
