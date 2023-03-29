@@ -18,19 +18,18 @@ import com.example.myapplication.R;
  * @date 2023/02/13
  * @describe 周报生成器的webview套壳开发
  */
-public class WeeklyReport extends AppCompatActivity {
+public class WeeklyReport_Main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // 设置为全屏（隐藏状态栏）
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weeklyreport);
         this.CreateWebView();
-        //TODO 设置悬浮按钮，对页面进行设置
     }
-
+//TODO 画面可能加载不出来
     private void CreateWebView() {
         final WebView wv_keekre = findViewById(R.id.wv_weeklyreport);
         // 设置 WebView 允许执行 JavaScript 脚本
@@ -39,18 +38,19 @@ public class WeeklyReport extends AppCompatActivity {
         // 而不是调用浏览器打开
         wv_keekre.setWebViewClient(new WebViewClient());
         String url = "https://weeklyreport.avemaria.fun/zh";
-        wv_keekre.loadUrl(url);
-        wv_keekre.setOnKeyListener(new View.OnKeyListener() {
-            // 设置 WebView 的按键监听器，覆写监听器的 onKey 函数，对返回键作特殊处理
-            // 当 WebView 可以返回到上一个页面时回到上一个页面
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK && wv_keekre.canGoBack()) {
-                    wv_keekre.goBack();
-                    return true;
+//            String url = "https://aicodehelper.com/tools/index.html#/";
+            wv_keekre.loadUrl(url);
+            wv_keekre.setOnKeyListener(new View.OnKeyListener() {
+                // 设置 WebView 的按键监听器，覆写监听器的 onKey 函数，对返回键作特殊处理
+                // 当 WebView 可以返回到上一个页面时回到上一个页面
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && wv_keekre.canGoBack()) {
+                        wv_keekre.goBack();
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
-    }
+            });
+        }
 }

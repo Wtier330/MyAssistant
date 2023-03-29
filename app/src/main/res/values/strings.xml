@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">MyTools</string>
-    <string name="main_apps_note_btn_name">记事本</string>
+    <!--    <string name="main_apps_note_btn_name">记事本</string>-->
+    <string-array name="function">
+        <item>记事本</item>
+        <item>天气</item>
+        <item>周报生成器</item>
+    </string-array>
     <string-array name="main_apps_btn_name">
         <item>记事本</item>
     </string-array>
