@@ -1,13 +1,6 @@
 package com.example.myapplication.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-
-import lombok.SneakyThrows;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,6 +11,9 @@ import com.example.myapplication.fragment.ArtistPalettDrawboard_Fragment;
 import com.example.myapplication.fragment.ArtistPalettPicture_Fragment;
 import com.example.myapplication.fragment.ArtistPalettSetting_Fragment;
 
+import androidx.appcompat.app.AppCompatActivity;
+import lombok.SneakyThrows;
+
 public class ArtistPalett_Main extends AppCompatActivity {
     private int[] settingicons = {R.drawable.setting_off,
             R.drawable.setting_on,
@@ -25,7 +21,7 @@ public class ArtistPalett_Main extends AppCompatActivity {
             R.drawable.drawing_borad_on,
             R.drawable.picture_off,
             R.drawable.picture_on};
-    private FragmentTransaction beginTransaction;
+    private FragmentTransaction start;
     private FrameLayout fragment_container;
     private ImageView ivApfragPicture;
     private ImageView ivApfragDrawboard;
@@ -42,19 +38,27 @@ public class ArtistPalett_Main extends AppCompatActivity {
     }
 
     public void showFragmentDrawboard(View view) {
+        FragIconChoice(R.drawable.drawing_borad_on);
+
+        FragmentTransaction beginTransaction;
         beginTransaction = getFragmentManager().beginTransaction();
         beginTransaction.replace(R.id.fragment_container, new ArtistPalettDrawboard_Fragment());
         beginTransaction.commit();
     }
 
     public void showFragmentPicture(View view) {
+        FragIconChoice(R.drawable.picture_on);
+        FragmentTransaction beginTransaction;
         beginTransaction = getFragmentManager().beginTransaction();
         beginTransaction.replace(R.id.fragment_container, new ArtistPalettPicture_Fragment());
         beginTransaction.commit();
     }
 
     public void showFragmentSetting(View view) {
+        FragIconChoice(R.drawable.setting_on);
+
         // 进行 Fragment 的事务操作
+        FragmentTransaction beginTransaction;
         beginTransaction = getFragmentManager().beginTransaction();
         beginTransaction.replace(R.id.fragment_container, new ArtistPalettSetting_Fragment());
         beginTransaction.commit();
@@ -63,20 +67,41 @@ public class ArtistPalett_Main extends AppCompatActivity {
 
     private void fraginit() {
         //开启事务
-        beginTransaction = getFragmentManager().beginTransaction();
+        start = getFragmentManager().beginTransaction();
         //碎片界面的第一个页面
-        beginTransaction.replace(R.id.fragment_container, new ArtistPalettDrawboard_Fragment());
+        start.replace(R.id.fragment_container, new ArtistPalettDrawboard_Fragment());
         //提交
-        beginTransaction.commit();
+        start.commit();
+//        FragIconChoice(R.drawable.drawing_borad_on);
+
         //初始化载入界面
         fragment_container = findViewById(R.id.fragment_container);
         ivApfragPicture = (ImageView) findViewById(R.id.iv_apfrag_picture);
         ivApfragDrawboard = (ImageView) findViewById(R.id.iv_apfrag_drawboard);
         ivApfragSetting = (ImageView) findViewById(R.id.iv_apfrag_setting);
 
-//        ivApfragPicture.setOnClickListener(this::showFragmentDrawboard);
-        ivApfragPicture.setOnClickListener(this::showFragmentDrawboard);
-        ivApfragDrawboard.setOnClickListener(this::showFragmentPicture);
+        ivApfragPicture.setOnClickListener(this::showFragmentPicture);
+        ivApfragDrawboard.setOnClickListener(this::showFragmentDrawboard);
         ivApfragSetting.setOnClickListener(this::showFragmentSetting);
+        FragIconChoice(R.drawable.drawing_borad_on);
+
+    }
+/*
+* 选中碎片后的图标切换
+* */
+    private void FragIconChoice(int iv) {
+        if (iv == (settingicons[1])) {
+            ivApfragPicture.setImageResource(R.drawable.picture_off);
+            ivApfragDrawboard.setImageResource(R.drawable.drawing_borad_off);
+            ivApfragSetting.setImageResource(R.drawable.setting_on);
+        } else if (iv == (settingicons[3])) {
+            ivApfragPicture.setImageResource(R.drawable.picture_off);
+            ivApfragDrawboard.setImageResource(R.drawable.drawing_borad_on);
+            ivApfragSetting.setImageResource(R.drawable.setting_off);
+        } else if (iv == (settingicons[5])) {
+            ivApfragPicture.setImageResource(R.drawable.picture_on);
+            ivApfragDrawboard.setImageResource(R.drawable.drawing_borad_off);
+            ivApfragSetting.setImageResource(R.drawable.setting_off);
+        }
     }
 }

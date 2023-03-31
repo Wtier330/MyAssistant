@@ -1,13 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#506565"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="vertical"
+        android:background="@color/khaki"
+        >
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RGB"
+                android:textStyle="italic"
+                android:textColor="#815C5C"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="R:"
+                android:textStyle="bold"
+                android:textColor="#815C5C"/>
+            <TextView
+                android:id="@+id/tv_ap_colorR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="100"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_weight="3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="G:"
+                android:textStyle="bold"
+                android:textColor="#815C5C"/>
+            <TextView
+                android:id="@+id/tv_ap_colorG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="100"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_weight="3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="B:"
+                android:textStyle="bold"
+                android:textColor="#815C5C"/>
+            <TextView
+                android:id="@+id/tv_ap_colorB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="100"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_weight="3"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hex:"
+                android:textStyle="italic"
+                android:textColor="#815C5C"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#646464"
+                android:id="@+id/tv_ap_hex"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_weight="9"/>
+        </LinearLayout>
+    </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <View
+                    android:id="@+id/ap_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#646464" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fbt_apdf_lockColor"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="right|bottom"
+                    android:layout_margin="20dp"
+                    android:onClick="settingMain"
+                    app:backgroundTint="@color/white"
+                    app:srcCompat="@drawable/fbt_setting" />
+            </FrameLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+           <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+               android:layout_marginLeft="15dp"
+               android:text="R :"
+               android:textStyle="bold"
+               android:textColor="#FF0000"
+               android:textSize="15dp"
+               />
+            <SeekBar
+                android:id="@+id/sb_ap_R"
+                android:layout_width="match_parent"
+                android:max="255"
+                android:progressTint="@color/khaki"
+                android:thumbTint="@color/khaki"
+                android:progress="128"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+        <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp" >
     <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="我是Activity" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold"
+        android:text="G :"
+        android:textColor="#00FF00"
+        android:textSize="15dp"
+        />
+        <SeekBar
+            android:id="@+id/sb_ap_G"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:progressTint="@color/khaki"
+        android:thumbTint="@color/khaki"
+        android:max="255"
+        android:progress="128"
+/>
 </LinearLayout>
+        <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
+    <TextView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold"
+        android:text="B :"
+        android:textColor="#0000FF"
+        android:textSize="15dp"
+        />
+
+
+        <SeekBar
+            android:id="@+id/sb_ap_B"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:max="255"
+            android:progressTint="@color/khaki"
+            android:thumbTint="@color/khaki"
+            android:progress="128"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

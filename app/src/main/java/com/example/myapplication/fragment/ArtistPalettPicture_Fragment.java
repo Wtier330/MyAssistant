@@ -1,5 +1,6 @@
 package com.example.myapplication.fragment;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import com.example.myapplication.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.app.Fragment;
 
 public class ArtistPalettPicture_Fragment extends Fragment{
         private View view;
@@ -24,9 +24,6 @@ public class ArtistPalettPicture_Fragment extends Fragment{
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             view = inflater.inflate(R.layout.artistpalett_picture_fragment, container, false);
-//        if (view != null) {
-//            initView();
-//        }
             return view;
         }
 

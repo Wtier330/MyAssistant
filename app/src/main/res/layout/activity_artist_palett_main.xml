@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
+        android:background="#fff"
         android:showDividers="beginning|end|middle">
 
         <ImageView
@@ -30,7 +31,6 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
@@ -40,11 +40,10 @@
         <ImageView
             android:id="@+id/iv_apfrag_drawboard"
             android:layout_width="30dp"
-
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:clickable="true"
@@ -53,15 +52,14 @@
         <ImageView
             android:id="@+id/iv_apfrag_setting"
             android:layout_width="30dp"
-
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:src="@drawable/setting_off" />
+            android:src="@drawable/setting_on" />
 
 
     </LinearLayout>
