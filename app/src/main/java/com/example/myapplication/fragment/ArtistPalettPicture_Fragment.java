@@ -1,18 +1,20 @@
 package com.example.myapplication.fragment;
 
-import android.app.Fragment;
+import static com.example.myapplication.constants.Fragmentconstants.SECTION_PIC;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.R;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-public class ArtistPalettPicture_Fragment extends Fragment{
+import com.example.myapplication.R;
+
+public class ArtistPalettPicture_Fragment extends Fragment {
         private View view;
 
         @Override
@@ -20,6 +22,13 @@ public class ArtistPalettPicture_Fragment extends Fragment{
             super.onAttach(context);
         }
 
+    public static ArtistPalettPicture_Fragment newInstance (String sectionNumber) {
+        ArtistPalettPicture_Fragment fragment = new ArtistPalettPicture_Fragment();
+        Bundle args = new Bundle();
+        args.putString(SECTION_PIC, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
         @Nullable
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

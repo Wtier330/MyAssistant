@@ -120,9 +120,10 @@
                     android:layout_margin="20dp"
                     android:onClick="settingMain"
                     app:backgroundTint="@color/white"
-                    app:srcCompat="@drawable/fbt_setting" />
+                    app:srcCompat="@drawable/shear_plate" />
             </FrameLayout>
 <LinearLayout
+    android:layout_marginBottom="40dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
