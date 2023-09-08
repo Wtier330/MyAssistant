@@ -1,6 +1,10 @@
 package com.example.myapplication.fragment;
 
-import android.app.Fragment;
+import static com.example.myapplication.constants.Fragmentconstants.SECTION_DRAW;
+
+import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,12 +14,14 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.myapplication.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.R;
+import com.example.myapplication.utils.ToastUtil;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+@SuppressLint("NonConstantResourceId")
 public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     private View view;
     private TextView tvApColorR;
@@ -32,6 +38,14 @@ public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.
     private String hexB = "64";
     private int[] rgb = {100, 100, 100};
     private TextView tv_ap_hex;
+    private ClipboardManager clipboardManager;
+    public static androidx.fragment.app.Fragment newInstance (String sectionNumber) {
+        ArtistPalettDrawboard_Fragment fragment = new ArtistPalettDrawboard_Fragment();
+        Bundle args = new Bundle();
+        args.putString(SECTION_DRAW, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -41,6 +55,7 @@ public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.artistpalett_drawboard_fragment, container, false);
+        initView();
 
         return view;
     }
@@ -48,13 +63,11 @@ public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
 
     }
 
     private void initView() {
         tv_ap_hex = view.findViewById(R.id.tv_ap_hex);
-        fbt_apdf_lockColor = view.findViewById(R.id.fbt_apdf_lockColor);
         tvApColorR = (TextView) view.findViewById(R.id.tv_ap_colorR);
         tvApColorG = (TextView) view.findViewById(R.id.tv_ap_colorG);
         tvApColorB = (TextView) view.findViewById(R.id.tv_ap_colorB);
@@ -62,24 +75,32 @@ public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.
         sbApR = (SeekBar) view.findViewById(R.id.sb_ap_R);
         sbApG = (SeekBar) view.findViewById(R.id.sb_ap_G);
         sbApB = (SeekBar) view.findViewById(R.id.sb_ap_B);
+
+        sbApR.setOnSeekBarChangeListener(this);
+        sbApG.setOnSeekBarChangeListener(this);
+        sbApB.setOnSeekBarChangeListener(this);
+
+        fbt_apdf_lockColor = view.findViewById(R.id.fbt_apdf_lockColor);
+        clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         fbt_apdf_lockColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*
                  * 屏幕rgb锁定
                  * */
+                String text = tv_ap_hex.getText().toString().trim();
+                ClipData clipData = ClipData.newPlainText("label", text);
+                clipboardManager.setPrimaryClip(clipData);
+                new ToastUtil().toastShort(getActivity(), String.valueOf(text + "已经复制到剪切板"));
             }
         });
-        sbApR.setOnSeekBarChangeListener(this);
-        sbApG.setOnSeekBarChangeListener(this);
-        sbApB.setOnSeekBarChangeListener(this);
     }
 
-    //將10進制轉換為16進制
+    //10进制转16进制并大写
     public static String encodeHEX(Integer numb) {
 
         String hex = Integer.toHexString(numb);
-        return hex;
+        return hex.toUpperCase();
 
     }
 
@@ -102,32 +123,16 @@ public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.
                 hexB = encodeHEX(progress);
                 break;
         }
-        hex = String.valueOf("#"+hexR+hexG+hexB);
+        hex = String.valueOf("#" + hexR + hexG + hexB);
         tv_ap_hex.setText(hex);
-        apView.setBackgroundColor(Color.rgb(rgb[0],rgb[1],rgb[2]));
+        apView.setBackgroundColor(Color.rgb(rgb[0], rgb[1], rgb[2]));
     }
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        switch (seekBar.getId()) {
-            case R.id.sb_ap_R:
-                break;
-            case R.id.sb_ap_G:
-                break;
-            case R.id.sb_ap_B:
-                break;
-        }
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        switch (seekBar.getId()) {
-            case R.id.sb_ap_R:
-                break;
-            case R.id.sb_ap_G:
-                break;
-            case R.id.sb_ap_B:
-                break;
-        }
     }
 }

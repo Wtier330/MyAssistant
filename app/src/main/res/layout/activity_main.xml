@@ -6,267 +6,275 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="224dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
             android:padding="10dp"
-            tools:ignore="MissingConstraints,Suspicious0dp"
+            android:layout_marginTop="30dp"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="224dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/bt_notepad"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:clickable="true"
-                app:cardBackgroundColor="#03A9F4"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="10dp"
+                tools:ignore="MissingConstraints,Suspicious0dp"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="224dp">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bt_notepad"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#03A9F4"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
-                        android:orientation="vertical">
+                        android:padding="12dp">
 
                         <LinearLayout
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginBottom="6dp"
-                            android:background="@drawable/note_icon"
-                            android:translationX="-4dp" />
-
-                        <TextView
-                            android:id="@+id/card_notepad_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="2dp"
-                            android:text="笔记本"
-                            android:textColor="#F5F5F5"
-                            android:textSize="22dp"
-                            android:textStyle="bold" />
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="记录美好生活"
-                            android:textColor="#EEEEEE"
-                            android:textSize="14dp" />
+                            <LinearLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/note_icon"
+                                android:translationX="-4dp" />
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/card_notepad_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="2dp"
+                                android:text="笔记本"
+                                android:textColor="#F5F5F5"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
 
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="记录美好生活"
+                                android:textColor="#EEEEEE"
+                                android:textSize="14dp" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/bt_weeklyreport"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="20dp"
-                android:clickable="true"
-                app:cardBackgroundColor="#498418"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                        </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp">
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
-                    <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bt_weeklyreport"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#498418"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
-                        android:orientation="vertical">
+                        android:padding="12dp">
 
                         <LinearLayout
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginBottom="6dp"
-                            android:background="@drawable/week"
-                            android:translationX="-4dp" />
-
-                        <TextView
-                            android:id="@+id/card_weeklyreport_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="2dp"
-                            android:text="周志生成"
-                            android:textColor="#F5F5F5"
-                            android:textSize="22dp"
-                            android:textStyle="bold" />
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="vertical">
 
-                        <TextView
+                            <LinearLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/week"
+                                android:translationX="-4dp" />
+
+                            <TextView
+                                android:id="@+id/card_weeklyreport_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="2dp"
+                                android:text="周志生成"
+                                android:textColor="#F5F5F5"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="效率工作"
+                                android:textColor="#EEEEEE"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="10dp"
+                tools:ignore="MissingConstraints,Suspicious0dp"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="224dp">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bt_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:clickable="true"
+                    android:padding="12dp"
+                    app:cardBackgroundColor="#FFB300"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="效率工作"
-                            android:textColor="#EEEEEE"
-                            android:textSize="14dp" />
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/sunny_icon"
+                                android:translationX="-4dp" />
 
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/card_weather_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="2dp"
+                                android:text="天气"
+                                android:textColor="#F5F5F5"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="知天气，晓冷暖"
+                                android:textColor="#EEEEEE"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bt_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:padding="12dp"
+                    app:cardBackgroundColor="#E34234"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/artist_palett"
+                                android:translationX="2dp" />
+
+                            <TextView
+                                android:id="@+id/card_color_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="2dp"
+                                android:text="调色盘"
+                                android:textColor="#F5F5F5"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="掌上快速调色"
+                                android:textColor="#EEEEEE"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
         </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fbt_main_setting"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="20dp"
+            android:onClick="settingMain"
+            app:backgroundTint="@color/white"
+            app:srcCompat="@drawable/fbt_setting" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:padding="10dp"
-            tools:ignore="MissingConstraints,Suspicious0dp"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="224dp">
+    </FrameLayout>
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/bt_weather"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:clickable="true"
-                android:padding="12dp"
-                app:cardBackgroundColor="#FFB300"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginBottom="6dp"
-                            android:background="@drawable/sunny_icon"
-                            android:translationX="-4dp" />
-
-                        <TextView
-                            android:id="@+id/card_weather_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="2dp"
-                            android:text="天气"
-                            android:textColor="#F5F5F5"
-                            android:textSize="22dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="知天气，晓冷暖"
-                            android:textColor="#EEEEEE"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/bt_color"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:clickable="true"
-                android:padding="12dp"
-                app:cardBackgroundColor="#E34234"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentBottom="true"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginBottom="6dp"
-                            android:background="@drawable/artist_palett"
-                            android:translationX="2dp" />
-
-                        <TextView
-                            android:id="@+id/card_color_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="2dp"
-                            android:text="调色盘"
-                            android:textColor="#F5F5F5"
-                            android:textSize="22dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="掌上快速调色"
-                            android:textColor="#EEEEEE"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fbt_main_setting"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_gravity="right|bottom"
-        android:layout_margin="20dp"
-        android:onClick="settingMain"
-        app:backgroundTint="@color/white"
-        app:srcCompat="@drawable/fbt_setting" />
 </FrameLayout>
