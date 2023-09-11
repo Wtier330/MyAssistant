@@ -1,9 +1,7 @@
 package com.example.myapplication.activity;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,18 +24,7 @@ import java.util.List;
 import lombok.SneakyThrows;
 
 public class ArtistPalett_Main extends AppCompatActivity {
-    private int[] settingicons = {R.drawable.setting_off,
-            R.drawable.setting_on,
-            R.drawable.drawing_borad_off,
-            R.drawable.drawing_borad_on,
-            R.drawable.picture_off,
-            R.drawable.picture_on};
-    private FragmentTransaction start;
-    private FrameLayout fragment_container;
-    private ImageView ivApfragPicture;
-    private ImageView ivApfragDrawboard;
-    private ImageView ivApfragSetting;
-    ////////
+
     private FragmentIndexAdapter ArtistPalett_fragmentAdapter;
     private ImageView iv_index_bottom_bar_picList,
             iv_index_bottom_bar_palett,
@@ -73,10 +60,10 @@ public class ArtistPalett_Main extends AppCompatActivity {
     }
     private void initData() {
         mfragment = new ArrayList<Fragment>();
-        mfragment.add(ArtistPalettSetting_Fragment.newInstance(getResources().getString(R.string.index_bottom_bar_setting)));
-        mfragment.add(ArtistPalettDrawboard_Fragment.newInstance(getResources().getString(R.string.index_bottom_bar_palett)));
         mfragment.add(ArtistPalettPicture_Fragment.newInstance(getResources().getString(R.string.index_bottom_bar_picList)));
+        mfragment.add(ArtistPalettDrawboard_Fragment.newInstance(getResources().getString(R.string.index_bottom_bar_palett)));
         mfragment.add(ArtistPalettCollection_Fragment.newInstance(getResources().getString(R.string.index_bottom_bar_collection)));
+        mfragment.add(ArtistPalettSetting_Fragment.newInstance(getResources().getString(R.string.index_bottom_bar_setting)));
         initIndexFragmentAdapter();
     }
 
@@ -84,7 +71,7 @@ public class ArtistPalett_Main extends AppCompatActivity {
         ArtistPalett_fragmentAdapter = new FragmentIndexAdapter(this.getSupportFragmentManager(), mfragment);
         index_vp_fragment_list_top.setAdapter(ArtistPalett_fragmentAdapter);
         iv_index_bottom_bar_picList.setSelected(true);
-        index_vp_fragment_list_top.setCurrentItem(0);
+        index_vp_fragment_list_top.setCurrentItem(3);
         index_vp_fragment_list_top.setOffscreenPageLimit(3);
         index_vp_fragment_list_top.addOnPageChangeListener(new TabOnPageChangeListener());
     }
