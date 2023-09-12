@@ -12,6 +12,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.FragmentIndexAdapter;
+import com.example.myapplication.bean.ArtistPalett;
+import com.example.myapplication.bean.Note;
+import com.example.myapplication.database.ArtistPalettSqilteHelper;
+import com.example.myapplication.database.NotepadSqliteOpenHelper;
 import com.example.myapplication.fragment.ArtistPalettCollection_Fragment;
 import com.example.myapplication.fragment.ArtistPalettDrawboard_Fragment;
 import com.example.myapplication.fragment.ArtistPalettPicture_Fragment;
@@ -37,21 +41,31 @@ public class ArtistPalett_Main extends AppCompatActivity {
             index_bottom_bar_setting;
     private RelativeLayout index_rl_contain;
     private List<Fragment> mfragment;
+    private ArtistPalettSqilteHelper artistPalettSqilteHelper;
+    private List<ArtistPalett> martistPaletts;
 
     @SneakyThrows
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artist_palett_main2);
+        setContentView(R.layout.activity_artist_palett_main);
         try {
             Thread.sleep(20);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        initDB();
         initView();
         initData();
         initEvent();
     }
+
+    private void initDB() {
+        artistPalettSqilteHelper = new ArtistPalettSqilteHelper(this);
+        martistPaletts = new ArrayList<>();
+
+    }
+
     private void initEvent() {
         index_bottom_bar_picList.setOnClickListener(new TabOnClickListener(0));
         index_bottom_bar_palett.setOnClickListener(new TabOnClickListener(1));
@@ -87,10 +101,12 @@ public class ArtistPalett_Main extends AppCompatActivity {
             index = i;
         }
 
+
+        /*
+        * 额外的按钮点击
+        * */
         public void onClick(View v) {
             if (index == 4) {
-                // 跳转到Scan界面
-//                Toast.makeText(MainActivity.this, "点击了扫描按钮", Toast.LENGTH_SHORT).show();
             } else {
                 //选择某一页
                 index_vp_fragment_list_top.setCurrentItem(index, false);

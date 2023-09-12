@@ -1,63 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.ArtistPalett_Main">
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <RelativeLayout
+        android:id="@+id/index_rl_contain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#fff"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="266dp">
+        android:layout_height="match_parent">
 
-    </FrameLayout>
+        <com.example.myapplication.view.MyViewPager
+            android:id="@+id/index_vp_fragment_list_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="#fff"
-        android:showDividers="beginning|end|middle">
+        </com.example.myapplication.view.MyViewPager>
 
-        <ImageView
-            android:id="@+id/iv_apfrag_picture"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:src="@drawable/picture_off" />
+        <FrameLayout
+            android:id="@+id/index_fl_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#fff">
 
-        <ImageView
-            android:id="@+id/iv_apfrag_drawboard"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:src="@drawable/drawing_borad_off" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDDDDD" />
 
-        <ImageView
-            android:id="@+id/iv_apfrag_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="30dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:src="@drawable/setting_on" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:orientation="horizontal">
+                <!--                android:background="@mipmap/bottom_bar_background"-->
+
+                <!-- 图集 -->
+
+                <LinearLayout
+                    android:id="@+id/index_bottom_bar_picList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_index_bottom_bar_picList"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/picture_off" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_picList"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+    <!-- 调色板 -->
+
+                <LinearLayout
+                    android:id="@+id/index_bottom_bar_palett"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_index_bottom_bar_palett"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/drawing_borad_off" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_palett"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+                <!-- 收藏 -->
+
+                <LinearLayout
+                    android:id="@+id/index_bottom_bar_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_index_bottom_bar_collection"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/collectioff" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_collection"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <!-- 设置 -->
+
+                <LinearLayout
+                    android:id="@+id/index_bottom_bar_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_index_bottom_bar_setting"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/setting_on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_setting"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
 
-    </LinearLayout>
+        </FrameLayout>
+    </RelativeLayout>
+
+
 </LinearLayout>

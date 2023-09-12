@@ -9,6 +9,24 @@
     <color name="white">#FFFFFFFF</color>
     <color name="khaki">#f0e68c</color>
     <color name="trans">#00000000</color>
-    <color name="colorAccent">@android:color/holo_red_dark</color>
+    <color name="green19CAAD">#19CAAD</color>
+    <color name="greyD6D5B7">#D6D5B7</color>
+    <color name="yellowD1BA74">#D1BA74</color>
+    <color name="yellowE6CEAC">#E6CEAC</color>
+    <color name="pinkECAD9E">#ECAD9E</color>
+    <color name="redF4606C">#F4606C</color>
+    <color name="green8CC7B5">#8CC7B5</color>
+    <color name="greenA0EEE1">#A0EEE1</color>
+    <color name="greenBEE7E9">#BEE7E9</color>
+    <color name="greenBEEDC7">#BEEDC7</color>
+    <color name="greyececec">#ececec</color>
+    <color name="colorPrimaryDark">#FF9600</color>
+    <color name="colorAccent">#ff009688</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <!--透明-->
+    <color name="transparent">#00000000</color>
+    <!--半透明-->
+    <color name="translucent">#22050505</color>
+    <color name="holo_red_dark">@android:color/holo_red_dark</color>
 
 </resources>

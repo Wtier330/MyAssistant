@@ -33,7 +33,9 @@ public class NotepadSqliteOpenHelper extends SQLiteOpenHelper {
      */
     public static final String createtablesql = "CREATE TABLE IF NOT EXISTS "
             + NOTE_TABLE_NAME
-            + "(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, content TEXT NOT NULL, create_time INTEGER, update_time INTEGER)";
+            + "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " title TEXT NOT NULL, content TEXT NOT NULL," +
+            " create_time INTEGER, update_time INTEGER)";
 
     public NotepadSqliteOpenHelper(@Nullable Context context) {
         super(context, DB_NAME, null, 1);
