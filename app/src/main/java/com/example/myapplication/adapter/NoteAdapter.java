@@ -12,10 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.activity.Note_Edit;
-import com.example.myapplication.activity.Notepad_Main;
 import com.example.myapplication.bean.Note;
 import com.example.myapplication.R;
-import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
+import com.example.myapplication.database.NotepadSqliteOpenHelper;
 import com.example.myapplication.utils.ViewUtil;
 import com.example.myapplication.view.LeftSlideView;
 import com.google.android.material.snackbar.Snackbar;

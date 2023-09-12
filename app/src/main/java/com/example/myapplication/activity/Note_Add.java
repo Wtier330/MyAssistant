@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.example.myapplication.R;
 import com.example.myapplication.bean.Note;
-import com.example.myapplication.databaseHelper.NotepadSqliteOpenHelper;
+import com.example.myapplication.database.NotepadSqliteOpenHelper;
 import com.example.myapplication.utils.ToastUtil;
 
 import java.util.Date;

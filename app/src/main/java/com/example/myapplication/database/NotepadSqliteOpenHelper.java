@@ -1,4 +1,9 @@
-package com.example.myapplication.databaseHelper;
+package com.example.myapplication.database;
+
+
+
+import static com.example.myapplication.constants.DBconstants.DB_NAME;
+import static com.example.myapplication.constants.DBconstants.NOTE_TABLE_NAME;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -17,8 +22,7 @@ import java.util.List;
 import androidx.annotation.Nullable;
 
 public class NotepadSqliteOpenHelper extends SQLiteOpenHelper {
-    public static final String NOTE_DB_NAME = "noteSQLite.db";
-    public static final String NOTE_TABLE_NAME = "note";
+
 
     /**
      * id: 表主键
@@ -32,7 +36,7 @@ public class NotepadSqliteOpenHelper extends SQLiteOpenHelper {
             + "(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, content TEXT NOT NULL, create_time INTEGER, update_time INTEGER)";
 
     public NotepadSqliteOpenHelper(@Nullable Context context) {
-        super(context, NOTE_DB_NAME, null, 1);
+        super(context, DB_NAME, null, 1);
     }
 
 
