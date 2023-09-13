@@ -1,11 +1,11 @@
 package com.example.myapplication.utils;
 
+import static com.example.myapplication.constants.SPfconstants.SPF_MAIN_NAME;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import static com.example.myapplication.constants.SPfconstants.SPF_MAIN_NAME;
-
-public class MainSpfUtil {
+public class SpfUtil {
 
     public static void saveString(Context context, String key, String value) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SPF_MAIN_NAME, Context.MODE_PRIVATE);

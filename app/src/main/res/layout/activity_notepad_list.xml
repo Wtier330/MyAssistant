@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    tools:context=".activity.NoteListActivity"
     tools:ignore="MissingDefaultResource">
     <!-- Bottom View Start-->
     <LinearLayout
