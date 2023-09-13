@@ -1,12 +1,8 @@
 package com.example.myapplication.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import static com.example.myapplication.constants.Otherconstants.KEY_NOTE_LAYOUT_MODE;
+import static com.example.myapplication.constants.Otherconstants.TYPE_GRID_LAYOUT;
+import static com.example.myapplication.constants.Otherconstants.TYPE_LINEAR_LAYOUT;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,10 +12,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.R;
 import com.example.myapplication.adapter.NoteAdapter;
 import com.example.myapplication.bean.Note;
 import com.example.myapplication.database.NotepadSqliteOpenHelper;
-import com.example.myapplication.R;
 import com.example.myapplication.utils.NoteSpfUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,9 +37,8 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
     private List<Note> mNotes;
     private NotepadSqliteOpenHelper notepadSqliteOpenHelper;
     private NoteAdapter noteAdapter;
-    private int currentListLayoutMode = NoteAdapter.TYPE_LINEAR_LAYOUT;
+    private int currentListLayoutMode = TYPE_LINEAR_LAYOUT;
 
-    public static final String KEY_NOTE_LAYOUT_MODE = "key_layout_mode";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,9 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item;
-        if (currentListLayoutMode == NoteAdapter.TYPE_LINEAR_LAYOUT) {
+        if (currentListLayoutMode == TYPE_LINEAR_LAYOUT) {
             item = menu.findItem(R.id.menu_note_linear).setChecked(true);
-        } else if (currentListLayoutMode == NoteAdapter.TYPE_GRID_LAYOUT) {
+        } else if (currentListLayoutMode == TYPE_GRID_LAYOUT) {
             item = menu.findItem(R.id.menu_note_grid).setChecked(true);
 
         }
@@ -106,22 +109,22 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
     private void setToGL() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         rlv_note.setLayoutManager(gridLayoutManager);
-        noteAdapter.setViewType(NoteAdapter.TYPE_GRID_LAYOUT);
+        noteAdapter.setViewType(TYPE_GRID_LAYOUT);
         noteAdapter.notifyDataSetChanged();
     }
 
     private void setToLL() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rlv_note.setLayoutManager(linearLayoutManager);
-        noteAdapter.setViewType(NoteAdapter.TYPE_LINEAR_LAYOUT);
+        noteAdapter.setViewType(TYPE_LINEAR_LAYOUT);
         noteAdapter.notifyDataSetChanged();
     }
 
     private void setLayout() {
-        currentListLayoutMode = NoteSpfUtil.getIntWithDefault(this, KEY_NOTE_LAYOUT_MODE, NoteAdapter.TYPE_LINEAR_LAYOUT);
-        if (currentListLayoutMode == NoteAdapter.TYPE_LINEAR_LAYOUT) {
+        currentListLayoutMode = NoteSpfUtil.getIntWithDefault(this, KEY_NOTE_LAYOUT_MODE, TYPE_LINEAR_LAYOUT);
+        if (currentListLayoutMode == TYPE_LINEAR_LAYOUT) {
             setToLL();
-        } else if (currentListLayoutMode == NoteAdapter.TYPE_GRID_LAYOUT) {
+        } else if (currentListLayoutMode == TYPE_GRID_LAYOUT) {
             setToGL();
         }
     }
@@ -167,12 +170,12 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
         switch (item.getItemId()) {
             case R.id.menu_note_linear:
                 setToLL();
-                currentListLayoutMode = NoteAdapter.TYPE_LINEAR_LAYOUT;
+                currentListLayoutMode = TYPE_LINEAR_LAYOUT;
                 NoteSpfUtil.saveInt(this, KEY_NOTE_LAYOUT_MODE, currentListLayoutMode);
                 return true;
             case R.id.menu_note_grid:
                 setToGL();
-                currentListLayoutMode = NoteAdapter.TYPE_GRID_LAYOUT;
+                currentListLayoutMode =TYPE_GRID_LAYOUT;
                 NoteSpfUtil.saveInt(this, KEY_NOTE_LAYOUT_MODE, currentListLayoutMode);
                 return true;
             default:

@@ -1,5 +1,8 @@
 package com.example.myapplication.adapter;
 
+import static com.example.myapplication.constants.Otherconstants.TYPE_GRID_LAYOUT;
+import static com.example.myapplication.constants.Otherconstants.TYPE_LINEAR_LAYOUT;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,22 +14,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.R;
 import com.example.myapplication.activity.Note_Edit;
 import com.example.myapplication.bean.Note;
-import com.example.myapplication.R;
 import com.example.myapplication.database.NotepadSqliteOpenHelper;
 import com.example.myapplication.utils.ViewUtil;
 import com.example.myapplication.view.LeftSlideView;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import lombok.Setter;
-
-import org.apache.commons.lang3.time.DateUtils;
 
 public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements LeftSlideView.IonSlidingButtonListener {
     private List<Note> mynotelist;
@@ -35,8 +39,7 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     NotepadSqliteOpenHelper notepadSqliteOpenHelper;
     @Setter
     private int viewType;
-    public static int TYPE_LINEAR_LAYOUT = 0;
-    public static int TYPE_GRID_LAYOUT = 1;
+
 
     private IonSlidingViewClickListener mIDeleteBtnClickListener;
     private IonSlidingViewClickListener mISetBtnClickListener;
@@ -142,7 +145,9 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         holder.tvcontent.setText(note.getContent());
         holder.tvtime.setText(note.getCreateTimeAsString());
         holder.tvdate.setText(note.getCreateDateAsString());
-
+        /*
+        * 相同日期的note将进行合并
+        * */
         if (position == 0) {
             holder.tvdate.setVisibility(View.VISIBLE);
         } else {

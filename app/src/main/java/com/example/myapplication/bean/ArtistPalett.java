@@ -12,7 +12,6 @@ import lombok.Data;
 public class ArtistPalett implements Serializable {
     private int id;
     private String color;
-
     private String colorTag;
     private Date createTime;
 
