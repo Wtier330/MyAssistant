@@ -14,7 +14,7 @@ android {
         }
         applicationId "com.example.myapplication"
         minSdk 30
-        targetSdk 33
+        targetSdk 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -27,7 +27,7 @@ android {
         }
         externalNativeBuild {
             cmake {
-                cppFlags ''
+                version '3.22.1'
             }
         }
 
@@ -49,9 +49,13 @@ android {
             version '3.22.1'
         }
     }
+    ndkVersion '24.0.8215888'
 }
 
 dependencies {
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:3.2.7'
+
     //OkHttp
     implementation 'com.squareup.okhttp3:okhttp:3.14.2'
     implementation 'com.squareup.okio:okio:1.17.4'

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/chatBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_artistpalett_drawboard_startTime"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="today" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="-"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_artistpalett_drawboard_endTime"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="today" />
+
+            <Spinner
+                android:id="@+id/sp_artistpalett_drawboard_timeChoice"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:entries="@array/searchDay"
+                android:overlapAnchor="false"
+                android:spinnerMode="dropdown" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_artistpalett_drawboard_search"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/et_sharp"
+                android:hint="输入 hex、标签 等"
+                android:textColorHint="@color/translucent"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iv_artistpalett_drawboard_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/search" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rl_artistpalett_drawboard_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp" />
+
+</LinearLayout>

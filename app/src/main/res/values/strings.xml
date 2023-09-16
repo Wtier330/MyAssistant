@@ -14,7 +14,19 @@
     <string-array name="main_apps_btn_name">
         <item>记事本</item>
     </string-array>
-
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string-array name="searchDay">
+        <item> </item>
+        <item>今天</item>
+        <item>昨天</item>
+        <item>本周</item>
+        <item>上周</item>
+        <item>本月</item>
+        <item>上月</item>
+        <item>今年</item>
+        <item>去年</item>
+    </string-array>
     <string-array name="cities">
         <item>北京</item>
         <item>天津</item>
