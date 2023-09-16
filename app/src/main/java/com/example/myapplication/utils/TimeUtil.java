@@ -16,4 +16,10 @@ public class TimeUtil {
     public String getCreateDateAsString() {
         return getCreateTimeAsString("YYYY-MM-dd");
     }
+    //格式化时间
+    public static String getTimes(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
+        return format.format(date);
+    }
+
 }

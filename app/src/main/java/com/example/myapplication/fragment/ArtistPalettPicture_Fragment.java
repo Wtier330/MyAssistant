@@ -22,7 +22,7 @@ import java.util.Set;
 /**
  * @author WTL
  * @date 2023/09/13
- * 该碎片用于处理
+ * 随机生成颜色
  */
 public class ArtistPalettPicture_Fragment extends Fragment {
     private View view;
