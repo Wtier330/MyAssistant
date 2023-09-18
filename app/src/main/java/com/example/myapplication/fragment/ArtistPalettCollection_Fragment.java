@@ -34,7 +34,7 @@ public class ArtistPalettCollection_Fragment extends Fragment {
     private EditText et_artistpalett_drawboard_search;
 
     private TimePickerView pvTime; //时间选择器对象
-
+    private String[] searchDays;
     public static ArtistPalettCollection_Fragment newInstance(String sectionNumber) {
         ArtistPalettCollection_Fragment fragment = new ArtistPalettCollection_Fragment();
         Bundle args = new Bundle();
@@ -57,7 +57,6 @@ public class ArtistPalettCollection_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 initTimePicker(tv_artistpalett_drawboard_startTime);
-
                 pvTime.show();
             }
         });
@@ -66,11 +65,22 @@ public class ArtistPalettCollection_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 initTimePicker(tv_artistpalett_drawboard_endTime);
-
                 pvTime.show();
             }
         });
-
+        sp_artistpalett_drawboard_timeChoice.setBackgroundColor(Color.argb(50,255,255,255));
+//        sp_artistpalett_drawboard_timeChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedDays = searchDays[position];
+//                sp_artistpalett_drawboard_timeChoice(selectedDays);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
     }
 
