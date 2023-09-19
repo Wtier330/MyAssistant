@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,8 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.ArtistAdapter;
+import com.example.myapplication.bean.ArtistPalett;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -27,6 +32,10 @@ import java.util.Set;
 public class ArtistPalettPicture_Fragment extends Fragment {
     private View view;
     private RecyclerView rlv_artist;
+    private List<ArtistPalett> artistPalett;
+    private ArtistAdapter artistAdapter;
+    private Button bt_artist_reggenerate;
+    private EditText etArtistpalettPicInputcount;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -45,7 +54,20 @@ public class ArtistPalettPicture_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.artistpalett_picture_fragment, container, false);
+        initView();
+        initEvent();
         return view;
+    }
+
+    private void initEvent() {
+        bt_artist_reggenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                * 生成随机颜色值
+                * */
+            }
+        });
     }
 
     @Override
@@ -55,10 +77,17 @@ public class ArtistPalettPicture_Fragment extends Fragment {
 
     private void initView() {
         rlv_artist = view.findViewById(R.id.rlv_artist);
+        artistAdapter = new ArtistAdapter(getActivity(), artistPalett);
+        rlv_artist.setAdapter(artistAdapter);
+
+        bt_artist_reggenerate = view.findViewById(R.id.bt_artist_reggenerate);
+        etArtistpalettPicInputcount = view.findViewById(R.id.et_artistpalett_pic_Inputcount);
+
     }
+
     /*
-    * 该方法用随机数进行生成不重复的颜色
-    * */
+     * 该方法用随机数进行生成不重复的颜色
+     * */
     private void randomColor(int numberOfColorsToGenerate) {
         Random random = new Random();
         Set<Integer> generatedColors = new HashSet<>();

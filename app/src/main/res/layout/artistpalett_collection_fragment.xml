@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/chatBackground"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:backgroundTint="#1987e6">
 
     <LinearLayout
+        android:id="@+id/ll_artist_contant"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="110dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
@@ -22,22 +24,24 @@
                 android:id="@+id/tv_artistpalett_drawboard_startTime"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:background="#fff"
                 android:gravity="center"
+                android:textColor="#fff"
                 android:text="today" />
 
             <TextView
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="-"
-                android:textSize="20dp" />
+
+                android:text="至"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_artistpalett_drawboard_endTime"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:background="#fff"
+                android:textColor="#fff"
+
                 android:gravity="center"
                 android:text="today" />
 
@@ -46,6 +50,7 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:entries="@array/searchDay"
+                android:popupBackground="@color/green8CC7B5"
                 android:overlapAnchor="false"
                 android:spinnerMode="dropdown" />
 
@@ -60,9 +65,8 @@
 
             <EditText
                 android:id="@+id/et_artistpalett_drawboard_search"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
                 android:background="@drawable/et_sharp"
                 android:hint="输入 hex、标签 等"
                 android:textColorHint="@color/translucent"
@@ -81,7 +85,12 @@
 
 
     </LinearLayout>
-
+    <ScrollView
+        android:background="@drawable/artist_collection_rounded_background"
+        android:layout_width="match_parent"
+        android:id="@+id/sv_artist_contant"
+        android:layout_height="match_parent"
+        android:layout_weight="0.618">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rl_artistpalett_drawboard_list"
         android:layout_width="match_parent"
@@ -89,5 +98,5 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp" />
-
+    </ScrollView>
 </LinearLayout>

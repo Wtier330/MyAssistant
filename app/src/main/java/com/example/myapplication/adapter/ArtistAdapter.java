@@ -1,5 +1,6 @@
 package com.example.myapplication.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +13,20 @@ import com.example.myapplication.R;
 import com.example.myapplication.bean.ArtistPalett;
 import com.example.myapplication.database.ArtistPalettSqilteHelper;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ArtistPalett> myartistPaletts;
 
     private LayoutInflater layoutInflater;
-    ArtistPalettSqilteHelper artistPalettSqilteHelper;
-
+    private ArtistPalettSqilteHelper artistPalettSqilteHelper;
+    private Context context;
+    public ArtistAdapter(Context context, List<ArtistPalett> myartistPaletts){
+        this.myartistPaletts = myartistPaletts;
+        this.context = context;
+        layoutInflater=LayoutInflater.from(context);
+        artistPalettSqilteHelper = new ArtistPalettSqilteHelper(context);
+    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

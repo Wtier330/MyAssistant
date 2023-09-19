@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -34,6 +38,11 @@ public class ArtistPalettCollection_Fragment extends Fragment {
     private EditText et_artistpalett_drawboard_search;
 
     private TimePickerView pvTime; //时间选择器对象
+    private String[] searchDays;
+    private ArrayAdapter<String> sparrayAdapter;
+    private String selectedDays;
+    private LinearLayout ll_artist_contant  ;
+    private ScrollView sv_artist_contant;
 
     public static ArtistPalettCollection_Fragment newInstance(String sectionNumber) {
         ArtistPalettCollection_Fragment fragment = new ArtistPalettCollection_Fragment();
@@ -57,7 +66,6 @@ public class ArtistPalettCollection_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 initTimePicker(tv_artistpalett_drawboard_startTime);
-
                 pvTime.show();
             }
         });
@@ -66,16 +74,28 @@ public class ArtistPalettCollection_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 initTimePicker(tv_artistpalett_drawboard_endTime);
-
                 pvTime.show();
             }
         });
+        sp_artistpalett_drawboard_timeChoice.setBackgroundColor(Color.argb(50, 255, 255, 255));
+        searchDays = getResources().getStringArray(R.array.searchDay);
 
+        sparrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.sp_wearther_item_layout, searchDays);
+        sp_artistpalett_drawboard_timeChoice.setAdapter(sparrayAdapter);
+        sp_artistpalett_drawboard_timeChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedDays = searchDays[position];
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
-
     private void initview(View view) {
+
         tv_artistpalett_drawboard_startTime = view.findViewById(R.id.tv_artistpalett_drawboard_startTime);
         tv_artistpalett_drawboard_endTime = view.findViewById(R.id.tv_artistpalett_drawboard_endTime);
         sp_artistpalett_drawboard_timeChoice = view.findViewById(R.id.sp_artistpalett_drawboard_timeChoice);
@@ -88,9 +108,9 @@ public class ArtistPalettCollection_Fragment extends Fragment {
     private void initTimePicker(TextView tv_date) {
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
-        startDate.set(1900, 1, 1,0,0);//起始时间
+        startDate.set(1900, 1, 1, 0, 0);//起始时间
         Calendar endDate = Calendar.getInstance();
-        endDate.set(2099, 12, 31,23,59);//结束时间
+        endDate.set(2099, 12, 31, 23, 59);//结束时间
         pvTime = new TimePickerView.Builder(getActivity(),
                 new TimePickerView.OnTimeSelectListener() {
                     @Override
