@@ -39,11 +39,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CardView bt_weather = findViewById(R.id.bt_weather);
         CardView bt_weeklyreport = findViewById(R.id.bt_weeklyreport);
         CardView bt_color = findViewById(R.id.bt_color);
+        CardView bt_hotComments = findViewById(R.id.bt_hotComments);
 
         SetOnClickListener(bt_weather);
         SetOnClickListener(bt_notepad);
         SetOnClickListener(bt_weeklyreport);
         SetOnClickListener(bt_color);
+        SetOnClickListener(bt_hotComments);
 
     }
     //点击事件
@@ -61,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_color://调色盘
                 startActivity(new Intent(getApplicationContext(), ArtistPalett_Main.class));
+                break;
+             case R.id.bt_hotComments://网易热评
+                startActivity(new Intent(getApplicationContext(), HotCom_Main.class));
                 break;
 
         }

@@ -21,6 +21,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private LayoutInflater layoutInflater;
     private ArtistPalettSqilteHelper artistPalettSqilteHelper;
     private Context context;
+
     public ArtistAdapter(Context context, List<ArtistPalett> myartistPaletts){
         this.myartistPaletts = myartistPaletts;
         this.context = context;
