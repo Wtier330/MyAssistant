@@ -2,13 +2,20 @@ package com.example.myapplication.fragment;
 
 import static com.example.myapplication.constants.Fragmentconstants.SECTION_PIC;
 
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +24,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 import com.example.myapplication.bean.ArtistPalett;
+import com.example.myapplication.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +49,8 @@ public class ArtistPalettPicture_Fragment extends Fragment {
     private ArtistPalett artist;
     private List<String> colors = new ArrayList<>();
     private List<Integer> generatedColors = new ArrayList<>();
-    private LayoutInflater inflater;
     private ColorAdapter colorAdapter = new ColorAdapter();
+    private ClipboardManager clipboardManager;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -69,34 +78,122 @@ public class ArtistPalettPicture_Fragment extends Fragment {
         bt_artist_reggenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int count;
+                int input = 0;
+                colors.clear();
+
+                if (!TextUtils.isEmpty(etArtistpalettPicInputcount.getText().toString())) {
+                    input = Integer.parseInt(etArtistpalettPicInputcount.getText().toString());
+                }
+
                 /**
                  * 生成随机颜色值
                  * */
-                if (!TextUtils.isEmpty(etArtistpalettPicInputcount.getText().toString())) {
-                    count = Integer.parseInt(etArtistpalettPicInputcount.getText().toString());
+                if (input != 0 && input <= 16581375) {
+                    randomColor(input);
+                } else if (input > 16581375) {
+                    ToastUtil.toastShort(getActivity(), "请输入一个合理的范围");
+                    etArtistpalettPicInputcount.setText("");
                 } else {
-                    count = 10;
+                    randomColor(10);
                 }
-                randomColor(count);
                 colorAdapter.notifyDataSetChanged();
+//                if (input != 0 ) {
+//                    count = input;
+//                } else {
+//                    count = 10;
+//                }
+//                colors.clear();
+//                randomColor(count);
+//                colorAdapter.notifyDataSetChanged();
             }
         });
+        rlv_artist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            }
+        });
+
+        rlv_artist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showPopupMenu(view, position);
+
+                return true;
+            }
+        });
+
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    private void showPopupMenu(View view, int position) {
+        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.color_listmenu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_star:
+                    // 处理收藏操作
+                    final EditText editText = new EditText(getActivity());
+                    editText.setSingleLine();
+                    editText.setHint("标签");
+                    editText.requestFocus();
+                    editText.setFocusable(true);
+                    AlertDialog.Builder inputDialog = new AlertDialog.Builder(getActivity())
+                            .setTitle("设置一个好记的名字吧！~")
+                            .setView(editText)
+                            .setPositiveButton("确定",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //TODO 收藏数据库存储
+                                            String content = editText.getText().toString();
+                                            if (TextUtils.isEmpty(content)) {
+                                            }
+                                            ToastUtil.toastShort(getActivity(),content+colors.get(position));
+                                        }
+                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                    inputDialog.create().show();
+
+
+                    return true;
+                case R.id.action_delete:
+                    // 处理删除操作
+                    colors.remove(position);
+                    colorAdapter.notifyDataSetChanged();
+                    return true;
+                case R.id.action_copy:
+                    // 处理复制操作
+                    clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("label", colors.get(position));
+                    clipboardManager.setPrimaryClip(clipData);
+                    ToastUtil.toastShort(getActivity(), colors.get(position) + "已经复制到剪切板");
+                    return true;
+                default:
+                    return false;
+            }
+        });
+
+        popupMenu.show();
     }
 
     private void initView() {
         rlv_artist = view.findViewById(R.id.rlv_artist);
-//        artistAdapter = new ArtistAdapter(getActivity(), artistPalett);
         rlv_artist.setAdapter(colorAdapter);
 
         bt_artist_reggenerate = view.findViewById(R.id.bt_artist_reggenerate);
         etArtistpalettPicInputcount = view.findViewById(R.id.et_artistpalett_pic_Inputcount);
+        registerForContextMenu(rlv_artist);// 注册上下文菜单
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.color_listmenu, menu); // 创建菜单布局
     }
 
     /*
@@ -126,51 +223,8 @@ public class ArtistPalettPicture_Fragment extends Fragment {
         }
     }
 
-    //    class ColorHolder extends RecyclerView.ViewHolder {
-//        public TextView tv_color;
-//        public TextView tv_tag;
-//        public View colorshow;
-//
-//        public ColorHolder(@NonNull View itemView) {
-//            super(itemView);
-//            colorshow = itemView.findViewById(R.id.color_view);
-//            tv_color = itemView.findViewById(R.id.tv_color_colorhex);
-//            tv_tag = itemView.findViewById(R.id.tv_color_colorTag);
-//        }
-//    }
-//
-//    class ColorAdapter extends RecyclerView.Adapter<ColorHolder> {
-//        @NonNull
-//        @Override
-//        public ColorHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//            inflater = LayoutInflater.from(getActivity());
-//            View v = inflater.inflate(R.layout.color_list, parent, false);
-//            ColorHolder colorHolder = new ColorHolder(v);
-//            return colorHolder;
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull ColorHolder holder, int position) {
-//            if (holder == null) {
-//                return;
-//            }
-//            randomColor(10);
-//            holder.tv_color.setText(colors.get(position));
-//            holder.colorshow.setBackgroundColor(generatedColors.get(position));
-//            notifyDataSetChanged();
-//        }
-//
-//        @Override
-//        public long getItemId(int position) {
-//            return position;
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return colors.size();
-//        }
-//    }
     class ColorAdapter extends BaseAdapter {
+
         @Override
         public int getCount() {
             return colors.size();
@@ -188,14 +242,15 @@ public class ArtistPalettPicture_Fragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v = View.inflate(getActivity(), R.layout.color_list, null);
+            View v = View.inflate(getActivity(), R.layout.color_drew_list, null);
             View colorshow = v.findViewById(R.id.color_view);
             TextView tv_hex = v.findViewById(R.id.tv_color_colorhex);
-            TextView tv_tag = v.findViewById(R.id.tv_color_colorTag);
 
             tv_hex.setText(colors.get(position));
             colorshow.setBackgroundColor(Color.parseColor(colors.get(position)));
             return v;
         }
     }
+
+
 }

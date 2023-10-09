@@ -66,12 +66,6 @@ public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
-
     private void initView() {
         tv_ap_hex = view.findViewById(R.id.tv_ap_hex);
         tvApColorR = (TextView) view.findViewById(R.id.tv_ap_colorR);
@@ -96,7 +90,7 @@ public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.
                 String text = tv_ap_hex.getText().toString().trim();
                 ClipData clipData = ClipData.newPlainText("label", text);
                 clipboardManager.setPrimaryClip(clipData);
-                new ToastUtil().toastShort(getActivity(), String.valueOf(text + "已经复制到剪切板"));
+                ToastUtil.toastShort(getActivity(), String.valueOf(text + "已经复制到剪切板"));
             }
         });
         /*
