@@ -7,6 +7,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,6 +30,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 import com.example.myapplication.bean.ArtistPalett;
+import com.example.myapplication.bean.Note;
+import com.example.myapplication.database.ArtistPalettSqilteHelper;
 import com.example.myapplication.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -47,11 +50,13 @@ public class ArtistPalettPicture_Fragment extends Fragment {
     private Button bt_artist_reggenerate;
     private EditText etArtistpalettPicInputcount;
     private ArtistPalett artist;
+    private List<ArtistPalett> martist;
     private List<String> colors = new ArrayList<>();
     private List<Integer> generatedColors = new ArrayList<>();
     private ColorAdapter colorAdapter = new ColorAdapter();
     private ClipboardManager clipboardManager;
-
+    ArtistPalettSqilteHelper palettSqilteHelper ;
+    SQLiteDatabase db;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -69,10 +74,17 @@ public class ArtistPalettPicture_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.artistpalett_picture_fragment, container, false);
+        DBinit();
         initView();
         initEvent();
         return view;
     }
+
+    private void DBinit() {
+//        db.execSQL(ArtistPalettSqilteHelper.createtablesql);
+       palettSqilteHelper = new ArtistPalettSqilteHelper(getActivity());
+    }
+
 
     private void initEvent() {
         bt_artist_reggenerate.setOnClickListener(new View.OnClickListener() {
@@ -97,19 +109,12 @@ public class ArtistPalettPicture_Fragment extends Fragment {
                     randomColor(10);
                 }
                 colorAdapter.notifyDataSetChanged();
-//                if (input != 0 ) {
-//                    count = input;
-//                } else {
-//                    count = 10;
-//                }
-//                colors.clear();
-//                randomColor(count);
-//                colorAdapter.notifyDataSetChanged();
             }
         });
         rlv_artist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
 
@@ -117,7 +122,6 @@ public class ArtistPalettPicture_Fragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 showPopupMenu(view, position);
-
                 return true;
             }
         });
@@ -146,8 +150,7 @@ public class ArtistPalettPicture_Fragment extends Fragment {
                                         public void onClick(DialogInterface dialog, int which) {
                                             //TODO 收藏数据库存储
                                             String content = editText.getText().toString();
-                                            if (TextUtils.isEmpty(content)) {
-                                            }
+                                            palettSqilteHelper.insertDataByPic(colors.get(position),content);
                                             ToastUtil.toastShort(getActivity(),content+colors.get(position));
                                         }
                                     }).setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -16,10 +16,12 @@ import androidx.annotation.Nullable;
 
 import com.example.myapplication.bean.ArtistPalett;
 import com.example.myapplication.bean.Note;
+import com.example.myapplication.utils.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * id: 表主键
@@ -42,7 +44,7 @@ public class ArtistPalettSqilteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(createtablesql);
     }
 
     @Override
@@ -61,6 +63,14 @@ public class ArtistPalettSqilteHelper extends SQLiteOpenHelper {
         values.put("color", artistPalett.getColor());
         values.put("colorTag",artistPalett.getColorTag());
         values.put("create_time", artistPalett.getCreateTime().getTime());
+        return db.insert(ARTIST_PALETT_TABLE_NAME, null, values);
+    }
+    public Long insertDataByPic(String colorHex,String colorTag) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("color", colorHex);
+        values.put("colorTag",colorTag);
+        values.put("create_time",System.currentTimeMillis());
         return db.insert(ARTIST_PALETT_TABLE_NAME, null, values);
     }
 

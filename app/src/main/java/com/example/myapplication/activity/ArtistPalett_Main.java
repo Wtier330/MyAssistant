@@ -62,8 +62,6 @@ public class ArtistPalett_Main extends AppCompatActivity {
 
     private void initDB() {
         artistPalettSqilteHelper = new ArtistPalettSqilteHelper(this);
-        martistPaletts = new ArrayList<>();
-
     }
 
     private void initEvent() {
