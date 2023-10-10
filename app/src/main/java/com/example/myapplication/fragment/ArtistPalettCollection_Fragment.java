@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,12 +29,13 @@ import java.util.Date;
 
 public class ArtistPalettCollection_Fragment extends Fragment {
 
-    private TextView tv_artistpalett_drawboard_startTime;
-    private TextView tv_artistpalett_drawboard_endTime;
-    private Spinner sp_artistpalett_drawboard_timeChoice;
-    private RecyclerView rl_artistpalett_drawboard_list;
-    private ImageView iv_artistpalett_drawboard_search;
-    private EditText et_artistpalett_drawboard_search;
+    private TextView tv_artistpalett_collection_startTime;
+    private TextView tv_artistpalett_collection_count;
+    private TextView tv_artistpalett_collection_endTime;
+    private Spinner sp_artistpalett_collection_timeChoice;
+    private RecyclerView rl_artistpalett_collection_list;
+    private ImageView iv_artistpalett_collection_search;
+    private EditText et_artistpalett_collection_search;
 
     private TimePickerView pvTime; //时间选择器对象
     private String[] searchDays;
@@ -62,46 +62,41 @@ public class ArtistPalettCollection_Fragment extends Fragment {
     }
 
     private void initEvent() {
-        tv_artistpalett_drawboard_startTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initTimePicker(tv_artistpalett_drawboard_startTime);
-                pvTime.show();
-            }
-        });
+//        tv_artistpalett_drawboard_startTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                initTimePicker(tv_artistpalett_drawboard_startTime);
+//                pvTime.show();
+//            }
+//        });
 
-        tv_artistpalett_drawboard_endTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initTimePicker(tv_artistpalett_drawboard_endTime);
-                pvTime.show();
-            }
-        });
-        sp_artistpalett_drawboard_timeChoice.setBackgroundColor(Color.argb(50, 255, 255, 255));
-        searchDays = getResources().getStringArray(R.array.searchDay);
-
-        sparrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.sp_wearther_item_layout, searchDays);
-        sp_artistpalett_drawboard_timeChoice.setAdapter(sparrayAdapter);
-        sp_artistpalett_drawboard_timeChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedDays = searchDays[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+//        tv_artistpalett_drawboard_endTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                initTimePicker(tv_artistpalett_drawboard_endTime);
+//                pvTime.show();
+//            }
+//        });
+//        sp_artistpalett_drawboard_timeChoice.setBackgroundColor(Color.argb(50, 255, 255, 255));
+//        searchDays = getResources().getStringArray(R.array.searchDay);
+//
+//        sparrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.sp_wearther_item_layout, searchDays);
+//        sp_artistpalett_drawboard_timeChoice.setAdapter(sparrayAdapter);
+//        sp_artistpalett_drawboard_timeChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                selectedDays = searchDays[position];
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
     }
 
     private void initview(View view) {
 
-        tv_artistpalett_drawboard_startTime = view.findViewById(R.id.tv_artistpalett_drawboard_startTime);
-        tv_artistpalett_drawboard_endTime = view.findViewById(R.id.tv_artistpalett_drawboard_endTime);
-        sp_artistpalett_drawboard_timeChoice = view.findViewById(R.id.sp_artistpalett_drawboard_timeChoice);
-        rl_artistpalett_drawboard_list = view.findViewById(R.id.rl_artistpalett_drawboard_list);
-        iv_artistpalett_drawboard_search = view.findViewById(R.id.iv_artistpalett_drawboard_search);
-        et_artistpalett_drawboard_search = view.findViewById(R.id.et_artistpalett_drawboard_search);
+
     }
 
     //初始化时间选择器

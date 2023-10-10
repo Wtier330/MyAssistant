@@ -2,26 +2,21 @@ package com.example.myapplication.database;
 
 import static com.example.myapplication.constants.DBconstants.ARTIST_PALETT_TABLE_NAME;
 import static com.example.myapplication.constants.DBconstants.DB_NAME;
-import static com.example.myapplication.constants.DBconstants.NOTE_TABLE_NAME;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.bean.ArtistPalett;
-import com.example.myapplication.bean.Note;
-import com.example.myapplication.utils.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * id: 表主键

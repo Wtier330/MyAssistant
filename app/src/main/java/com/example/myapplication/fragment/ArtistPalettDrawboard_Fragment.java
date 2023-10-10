@@ -24,6 +24,10 @@ import com.example.myapplication.R;
 import com.example.myapplication.utils.ToastUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+/**
+ * @author WTL
+ * @date 2023/04/01
+ */
 @SuppressLint("NonConstantResourceId")
 public class ArtistPalettDrawboard_Fragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     private View view;

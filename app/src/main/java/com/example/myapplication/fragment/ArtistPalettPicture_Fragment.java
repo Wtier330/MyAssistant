@@ -7,7 +7,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,7 +29,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
 import com.example.myapplication.bean.ArtistPalett;
-import com.example.myapplication.bean.Note;
 import com.example.myapplication.database.ArtistPalettSqilteHelper;
 import com.example.myapplication.utils.ToastUtil;
 
@@ -41,7 +39,7 @@ import java.util.Random;
 /**
  * @author WTL
  * @date 2023/09/13
- * 随机生成颜色
+ * 随机生成颜色，并进行标记处理
  */
 public class ArtistPalettPicture_Fragment extends Fragment {
     private View view;
@@ -49,14 +47,12 @@ public class ArtistPalettPicture_Fragment extends Fragment {
     private List<ArtistPalett> artistPalett = new ArrayList<>();
     private Button bt_artist_reggenerate;
     private EditText etArtistpalettPicInputcount;
-    private ArtistPalett artist;
-    private List<ArtistPalett> martist;
     private List<String> colors = new ArrayList<>();
     private List<Integer> generatedColors = new ArrayList<>();
     private ColorAdapter colorAdapter = new ColorAdapter();
     private ClipboardManager clipboardManager;
-    ArtistPalettSqilteHelper palettSqilteHelper ;
-    SQLiteDatabase db;
+    ArtistPalettSqilteHelper palettSqilteHelper;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -81,8 +77,7 @@ public class ArtistPalettPicture_Fragment extends Fragment {
     }
 
     private void DBinit() {
-//        db.execSQL(ArtistPalettSqilteHelper.createtablesql);
-       palettSqilteHelper = new ArtistPalettSqilteHelper(getActivity());
+        palettSqilteHelper = new ArtistPalettSqilteHelper(getActivity());
     }
 
 
@@ -150,8 +145,8 @@ public class ArtistPalettPicture_Fragment extends Fragment {
                                         public void onClick(DialogInterface dialog, int which) {
                                             //TODO 收藏数据库存储
                                             String content = editText.getText().toString();
-                                            palettSqilteHelper.insertDataByPic(colors.get(position),content);
-                                            ToastUtil.toastShort(getActivity(),content+colors.get(position));
+                                            palettSqilteHelper.insertDataByPic(colors.get(position), content);
+                                            ToastUtil.toastShort(getActivity(), colors.get(position) + "收藏成功" + "," + content);
                                         }
                                     }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                 @Override

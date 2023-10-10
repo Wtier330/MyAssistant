@@ -6,6 +6,7 @@ import static com.example.myapplication.constants.Otherconstants.TYPE_LINEAR_LAY
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,9 +75,11 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
 
     private void DBinit() {
         notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(this);
+        SQLiteDatabase db = notepadSqliteOpenHelper.getWritableDatabase();
+        if (db == null) {
+            db.execSQL(NotepadSqliteOpenHelper.createtablesql);
+        }
         mNotes = new ArrayList<>();
-//        Note note = Note.builder().title("title1").content("content1").createTime(new Date()).build();
-//        mNotes.add(note);
     }
 
     /*
@@ -101,6 +104,7 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
     @Override
     protected void onResume() {
         super.onResume();
+        DBinit();//没有表的时候，打开会崩，因此需要执行一个数据库初始化
         refreshDataFromDB();
         setLayout();
 
@@ -175,7 +179,7 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
                 return true;
             case R.id.menu_note_grid:
                 setToGL();
-                currentListLayoutMode =TYPE_GRID_LAYOUT;
+                currentListLayoutMode = TYPE_GRID_LAYOUT;
                 NoteSpfUtil.saveInt(this, KEY_NOTE_LAYOUT_MODE, currentListLayoutMode);
                 return true;
             default:
