@@ -1,6 +1,7 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.bean.ArtistPalett;
 import com.example.myapplication.database.ArtistPalettSqilteHelper;
+import com.example.myapplication.utils.ToastUtil;
 
 import java.util.List;
 
@@ -21,42 +23,46 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private LayoutInflater layoutInflater;
     private ArtistPalettSqilteHelper artistPalettSqilteHelper;
     private Context context;
+    private ArtistPalett artistPalett;
 
-    public ArtistAdapter(Context context, List<ArtistPalett> myartistPaletts){
+    public ArtistAdapter(Context context, List<ArtistPalett> myartistPaletts) {
         this.myartistPaletts = myartistPaletts;
         this.context = context;
-        layoutInflater=LayoutInflater.from(context);
+        layoutInflater = LayoutInflater.from(context);
         artistPalettSqilteHelper = new ArtistPalettSqilteHelper(context);
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.color_list,parent,false);
+        View view = layoutInflater.inflate(R.layout.color_list, parent, false);
         MycolorHoder mycolorHoder = new MycolorHoder(view);
         return mycolorHoder;
     }
+
     /*
-    * 列表刷新
-    * */
+     * 列表刷新
+     * */
     public void refreshData(List<ArtistPalett> artistPaletts) {
         this.myartistPaletts = artistPaletts;
         notifyDataSetChanged();
     }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ArtistPalett artistPalett = myartistPaletts.get(position);
-        if (holder == null){
+        artistPalett = myartistPaletts.get(position);
+        if (holder == null) {
             return;
         }
-        if (holder instanceof  MycolorHoder){
-            bindview((MycolorHoder)holder,position);
-        }
+            bindview((MycolorHoder) holder,position);
+
     }
 
-    private void bindview(@NonNull MycolorHoder holder,@NonNull int position) {
-        ArtistPalett artistPalett = myartistPaletts.get(position);
+    private void bindview(@NonNull MycolorHoder holder, @NonNull int position) {
+         artistPalett = myartistPaletts.get(position);
         holder.tv_colorHex.setText(artistPalett.getColor());
         holder.tv_colorTag.setText(artistPalett.getColorTag());
+        holder.color_view.setBackgroundColor(Color.parseColor(artistPalett.getColor()));
 
         /**
          * 点击列表item的对应控件能进行相应修改
@@ -67,6 +73,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 /**
                  * 修改颜色的标识
                  */
+                ToastUtil.toastShort(v.getContext(), String.valueOf(getItemId(position)));
             }
         });
         holder.tv_colorHex.setOnClickListener(new View.OnClickListener() {
@@ -82,11 +89,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return 0;
+        return myartistPaletts.size();
     }
-    class MycolorHoder extends RecyclerView.ViewHolder{
+
+    class MycolorHoder extends RecyclerView.ViewHolder {
         public View color_view;
-        public TextView tv_colorHex,tv_colorTag;
+        public TextView tv_colorHex, tv_colorTag;
+
         public MycolorHoder(@NonNull View itemView) {
             super(itemView);
             color_view = itemView.findViewById(R.id.color_view);

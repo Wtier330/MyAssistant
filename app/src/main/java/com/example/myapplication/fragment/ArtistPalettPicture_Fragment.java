@@ -7,6 +7,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -78,6 +79,10 @@ public class ArtistPalettPicture_Fragment extends Fragment {
 
     private void DBinit() {
         palettSqilteHelper = new ArtistPalettSqilteHelper(getActivity());
+        SQLiteDatabase db = palettSqilteHelper.getWritableDatabase();
+        if (db == null) {
+            db.execSQL(ArtistPalettSqilteHelper.createtablesql);
+        }
     }
 
 
@@ -241,8 +246,8 @@ public class ArtistPalettPicture_Fragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View v = View.inflate(getActivity(), R.layout.color_drew_list, null);
-            View colorshow = v.findViewById(R.id.color_view);
-            TextView tv_hex = v.findViewById(R.id.tv_color_colorhex);
+            View colorshow = v.findViewById(R.id.drew_view);
+            TextView tv_hex = v.findViewById(R.id.tv_drew_colorhex);
 
             tv_hex.setText(colors.get(position));
             colorshow.setBackgroundColor(Color.parseColor(colors.get(position)));

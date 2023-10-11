@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="50dp"
     android:orientation="horizontal"
-    android:paddingLeft="20dp"
-    android:paddingTop="10dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="10dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
+    android:paddingLeft="4dp"
+    android:paddingTop="4dp"
+    android:paddingRight="4dp"
+    android:paddingBottom="4dp">
 
         <View
             android:id="@+id/color_view"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:background="#f3e3c8" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="40dp"
             android:background="#666666"
             android:layout_weight="1"
             android:orientation="horizontal">
@@ -29,7 +25,7 @@
             <TextView
                 android:id="@+id/tv_color_colorhex"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:textColor="#fdfdfd"
@@ -39,7 +35,7 @@
             <TextView
                 android:id="@+id/tv_color_colorTag"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:textColor="#fdfdfd"
@@ -47,7 +43,4 @@
                 android:text="colortag" />
 
         </LinearLayout>
-
-    </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

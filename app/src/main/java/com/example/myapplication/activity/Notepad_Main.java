@@ -76,9 +76,7 @@ public class Notepad_Main extends AppCompatActivity implements NoteAdapter.IonSl
     private void DBinit() {
         notepadSqliteOpenHelper = new NotepadSqliteOpenHelper(this);
         SQLiteDatabase db = notepadSqliteOpenHelper.getWritableDatabase();
-        if (db == null) {
             db.execSQL(NotepadSqliteOpenHelper.createtablesql);
-        }
         mNotes = new ArrayList<>();
     }
 

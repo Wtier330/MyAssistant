@@ -82,7 +82,6 @@ public class NoteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Note note = mynotelist.get(position);
         /*
          * 判断holder属于哪一个实体
          * tips: 两个方法不能写一起，类型不同，需要单独写出来进行绑定
