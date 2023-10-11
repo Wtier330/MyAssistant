@@ -4,93 +4,72 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/chatBackground"
-    android:backgroundTint="#1987e6"
+    android:backgroundTint="#f3e3c8"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_artist_contant"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="155dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_artistpalett_collection_startTime"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="today"
-                android:textColor="#fff" />
-
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-
-                android:text="至"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/tv_artistpalett_collection_endTime"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-
-                android:text="today"
-                android:textColor="#fff" />
-
-            <Spinner
-                android:id="@+id/sp_artistpalett_collection_timeChoice"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:entries="@array/searchDay"
-                android:overlapAnchor="false"
-                android:popupBackground="@color/green8CC7B5"
-                android:spinnerMode="dropdown" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/et_artistpalett_collection_search"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:background="@drawable/et_sharp"
-                android:hint="输入 hex、标签 等"
-                android:textColorHint="@color/translucent"
-                android:textSize="14sp" />
-
+            android:layout_height="45dp">
             <ImageView
-                android:id="@+id/iv_artistpalett_collection_search"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/search" />
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/back"
+                android:id="@+id/iv_artistpalett_collection_back"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/share"
+                android:id="@+id/iv_artistpalett_collection_share"/>
+        </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/favourite_page"
+                android:id="@+id/iv_artistpalett_collection_favourite"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="12dp"
+                android:text="我的收藏"
+                android:textColor="#938888"
+                android:textSize="15sp"/>
 
         </LinearLayout>
-
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/et_artistpalett_collection_search"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:background="@drawable/edit_background"
+            android:hint="颜色/标签"/>
 
     </LinearLayout>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="15dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
