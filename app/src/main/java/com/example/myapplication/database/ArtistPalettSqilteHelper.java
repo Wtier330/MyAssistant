@@ -93,7 +93,15 @@ public class ArtistPalettSqilteHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("color", artistPalett.getColor());
         values.put("colorTag",artistPalett.getColorTag());
-        values.put("update_time", artistPalett.getCreateTime().getTime());
+        values.put("create_time", artistPalett.getCreateTime().getTime());
+        return db.update(ARTIST_PALETT_TABLE_NAME, values, "id = ?", new String[]{String.valueOf(artistPalett.getId())});
+    }
+    public int updateTag(ArtistPalett artistPalett,String tag) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("color", artistPalett.getColor());
+        values.put("colorTag",tag);
+        values.put("create_time", artistPalett.getCreateTime().getTime());
         return db.update(ARTIST_PALETT_TABLE_NAME, values, "id = ?", new String[]{String.valueOf(artistPalett.getId())});
     }
 

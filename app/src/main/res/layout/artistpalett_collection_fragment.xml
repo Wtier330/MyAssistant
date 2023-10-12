@@ -98,7 +98,10 @@
                 android:id="@+id/rl_artistpalett_collection_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp" />
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

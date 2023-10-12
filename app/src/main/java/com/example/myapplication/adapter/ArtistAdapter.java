@@ -1,10 +1,13 @@
 package com.example.myapplication.adapter;
 
+import android.app.AlertDialog;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.bean.ArtistPalett;
 import com.example.myapplication.database.ArtistPalettSqilteHelper;
 import com.example.myapplication.utils.ToastUtil;
+import com.example.myapplication.utils.ViewUtil;
 
 import java.util.List;
 
@@ -24,6 +28,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private ArtistPalettSqilteHelper artistPalettSqilteHelper;
     private Context context;
     private ArtistPalett artistPalett;
+    private ClipboardManager clipboardManager;
 
     public ArtistAdapter(Context context, List<ArtistPalett> myartistPaletts) {
         this.myartistPaletts = myartistPaletts;
@@ -54,14 +59,16 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (holder == null) {
             return;
         }
-            bindview((MycolorHoder) holder,position);
+        bindview((MycolorHoder) holder, position);
 
     }
 
     private void bindview(@NonNull MycolorHoder holder, @NonNull int position) {
-         artistPalett = myartistPaletts.get(position);
+        artistPalett = myartistPaletts.get(position);
         holder.tv_colorHex.setText(artistPalett.getColor());
+        holder.tv_colorHex.setTextColor(Color.parseColor(ViewUtil.getComplementaryColor(artistPalett.getColor())));
         holder.tv_colorTag.setText(artistPalett.getColorTag());
+        holder.tv_colorTag.setTextColor(Color.parseColor(ViewUtil.getComplementaryColor(artistPalett.getColor())));
         holder.color_view.setBackgroundColor(Color.parseColor(artistPalett.getColor()));
 
         /**
@@ -73,7 +80,28 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 /**
                  * 修改颜色的标识
                  */
-                ToastUtil.toastShort(v.getContext(), String.valueOf(getItemId(position)));
+                final EditText editText = new EditText(v.getContext());
+                editText.setSingleLine();
+                editText.setHint("来设置一个新的标签吧！");
+                editText.requestFocus();
+                editText.setFocusable(true);
+                AlertDialog.Builder updataDialog = new AlertDialog.Builder(v.getContext())
+                        .setTitle("修改标签")
+                        .setView(editText)
+                        .setPositiveButton("确定", (dialog, which) -> {
+                            String newName = editText.getText().toString();
+                            String oldName = holder.tv_colorTag.getText().toString();
+                            if (oldName.equals(newName)) {
+                                dialog.dismiss();
+                            } else {
+                                artistPalettSqilteHelper.updateTag(artistPalett, newName);
+                            }
+                            notifyItemChanged(position);
+                            ToastUtil.toastShort(v.getContext(), "修改成功" + newName);
+                        }).setNegativeButton("取消", (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        });
+                updataDialog.create().show();
             }
         });
         holder.tv_colorHex.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +110,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 /**
                  * 点击进行跳转到对应的颜色值
                  */
+
             }
         });
 
