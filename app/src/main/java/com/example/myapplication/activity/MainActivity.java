@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CardView bt_weeklyreport = findViewById(R.id.bt_weeklyreport);
         CardView bt_color = findViewById(R.id.bt_color);
         CardView bt_hotComments = findViewById(R.id.bt_hotComments);
-
+        CardView bt_DateCalu = findViewById(R.id.bt_DateCalu);
+        SetOnClickListener(bt_DateCalu);
         SetOnClickListener(bt_weather);
         SetOnClickListener(bt_notepad);
         SetOnClickListener(bt_weeklyreport);
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SetOnClickListener(bt_hotComments);
 
     }
+
     //点击事件
     @Override
     public void onClick(View v) {
@@ -64,8 +66,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_color://调色盘
                 startActivity(new Intent(getApplicationContext(), ArtistPalett_Main.class));
                 break;
-             case R.id.bt_hotComments://网易热评
+            case R.id.bt_hotComments://网易热评
                 startActivity(new Intent(getApplicationContext(), HotCom_Main.class));
+                break;
+            case R.id.bt_DateCalu://日期计算器
+                startActivity(new Intent(getApplicationContext(), DateCalu_Main.class));
                 break;
 
         }
@@ -100,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+
     public void setFullscreen(boolean isShowStatusBar, boolean isShowNavigationBar) {
         int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

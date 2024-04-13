@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Design.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.DateCalu_Main"
+            android:exported="false" />
+        <activity
             android:name=".activity.HotCom_Main"
             android:exported="false" />
         <activity
