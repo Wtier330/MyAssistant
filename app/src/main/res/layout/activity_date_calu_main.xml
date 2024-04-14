@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fefefe"
     android:orientation="vertical"
     tools:context=".activity.DateCalu_Main">
 
@@ -15,7 +16,7 @@
         android:layout_margin="15dp"
         android:linksClickable="true"
         android:text="北京时间"
-        android:textSize="20sp" />
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +24,40 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="起始日期:"
+                android:textColor="#000"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="默认今天"
+                android:textColor="#333"
+                android:textSize="8sp" />
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/et_DateCalu_InputYear"
-            android:layout_width="80dp"
+            android:layout_width="79dp"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:inputType="number"
             android:text="2024"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -41,17 +66,17 @@
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:text="年"
-            android:textSize="24sp" />
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/et_DateCalu_InputMonth"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:inputType="number"
             android:text="4"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -60,17 +85,17 @@
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:text="月"
-            android:textSize="24sp" />
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/et_DateCalu_InputDay"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:inputType="number"
             android:text="13"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -79,7 +104,7 @@
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:text="日"
-            android:textSize="24sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,6 +112,17 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_DateCalu_bc"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="#cfd8dc"
+            android:gravity="center"
+            android:text="向前计算"
+            android:textColor="#03884C"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/et_DateCalu_Input"
@@ -96,7 +132,87 @@
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:text="367"
-            android:textSize="24sp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_horizontal"
+            android:text="天"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/bt_DateCalu_ad"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="#fff"
+            android:gravity="center"
+            android:text="往后计算"
+            android:textColor="#919191"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#ececec" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_DateCalue_Result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15dp"
+            android:gravity="center_horizontal"
+            android:text="计算结果"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="80dp"
+        android:background="#ececec" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="结束日期:"
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/et_DateCalu_OutputYear"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:inputType="number"
+            android:text="2025"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -104,21 +220,65 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
-            android:text="天"
-            android:textSize="24sp" />
+            android:text="年"
+            android:textSize="12sp" />
 
+        <EditText
+            android:id="@+id/et_DateCalu_OutputMonth"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:inputType="number"
+            android:text="3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="月"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/et_DateCalu_OutputDay"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:inputType="number"
+            android:text="22"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="日"
+            android:textSize="12sp" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/bt_DateCalu_diff"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#009788"
+        android:text="做差"
+        android:textColor="#e5e5e5"
+        android:textSize="15sp" />
     <TextView
-        android:id="@+id/tv_DateCalue_Result"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_DateCalue_diff"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="15dp"
         android:gravity="center_horizontal"
-        android:text="计算结果"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
+        android:text="差值天数"
+        android:textSize="24sp" />
 </LinearLayout>
