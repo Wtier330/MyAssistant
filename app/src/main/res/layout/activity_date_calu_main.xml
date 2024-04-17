@@ -48,7 +48,6 @@
                 android:textSize="8sp" />
         </LinearLayout>
 
-
         <EditText
             android:id="@+id/et_DateCalu_InputYear"
             android:layout_width="79dp"
@@ -57,6 +56,7 @@
             android:gravity="center_horizontal"
             android:inputType="number"
             android:text="2024"
+            android:drawablePadding="-18dp"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -86,7 +86,6 @@
             android:gravity="center_horizontal"
             android:text="月"
             android:textSize="12sp" />
-
         <EditText
             android:id="@+id/et_DateCalu_InputDay"
             android:layout_width="80dp"
@@ -222,7 +221,6 @@
             android:gravity="center_horizontal"
             android:text="年"
             android:textSize="12sp" />
-
         <EditText
             android:id="@+id/et_DateCalu_OutputMonth"
             android:layout_width="80dp"
@@ -241,7 +239,6 @@
             android:gravity="center_horizontal"
             android:text="月"
             android:textSize="12sp" />
-
         <EditText
             android:id="@+id/et_DateCalu_OutputDay"
             android:layout_width="80dp"
