@@ -1,5 +1,7 @@
 package com.example.myapplication.activity;
 
+import static com.example.myapplication.utils.TimeUtil.isValidDate;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.utils.EditTextUtils;
+import com.example.myapplication.utils.ToastUtil;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -74,13 +77,34 @@ public class DateCalu_Main extends AppCompatActivity {
             year = et_DateCalu_InputYear.getText().toString().trim();
             month = et_DateCalu_InputMonth.getText().toString().trim();
             day = et_DateCalu_InputDay.getText().toString().trim();
-            if (!TextUtils.isEmpty(year)) {
-                EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear);
-                date = formateDate(year, month, day);
-                tv_DateCalue_Result.setText(addOrSubtractDays(date, Math.abs(input)).toString());
+            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty()) {
+                if (isValidDate(year, month, day)) {
+
+                    date = formateDate(year, month, day);
+                    tv_DateCalue_Result.setText(addOrSubtractDays(formateDate(year, month, day), Math.abs(input)).toString());
+                } else {
+                    ToastUtil.toastShort(this,"输入的日期不合理");
+                }
+
             } else {
-                EditTextUtils.InputIsEmpty(this, et_DateCalu_InputYear);
+                if (!TextUtils.isEmpty(year)) {
+                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear);
+                } else {
+                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputYear);
+                }
+                if (!TextUtils.isEmpty(month)) {
+                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputMonth);
+                } else {
+                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputMonth);
+                }
+                if (!TextUtils.isEmpty(day)) {
+                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputDay);
+                } else {
+                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputDay);
+                }
+
             }
+
         });
 
         mBtDateCaluBc.setOnClickListener((l) -> {
@@ -89,9 +113,27 @@ public class DateCalu_Main extends AppCompatActivity {
             year = et_DateCalu_InputYear.getText().toString().trim();
             month = et_DateCalu_InputMonth.getText().toString().trim();
             day = et_DateCalu_InputDay.getText().toString().trim();
-            date = formateDate(year, month, day);
-            tv_DateCalue_Result.setText(addOrSubtractDays(date, -Math.abs(input)).toString());
+            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty()) {
+                date = formateDate(year, month, day);
+                tv_DateCalue_Result.setText(addOrSubtractDays(date, -Math.abs(input)).toString());
+            } else {
+                if (!TextUtils.isEmpty(year)) {
+                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear);
+                } else {
+                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputYear);
+                }
+                if (!TextUtils.isEmpty(month)) {
+                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputMonth);
+                } else {
+                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputMonth);
+                }
+                if (!TextUtils.isEmpty(day)) {
+                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputDay);
+                } else {
+                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputDay);
+                }
 
+            }
         });
         mBtDateCaluDiff.setOnClickListener((l) -> {
             outyear = mEtDateCaluOutputYear.getText().toString().trim();
@@ -106,7 +148,7 @@ public class DateCalu_Main extends AppCompatActivity {
 
     //判断是否为闰年
     private boolean isLeapYear(int input) {
-        return LeapYear = (input % 400 == 0) || (input % 4 == 0 && input % 100 != 0);
+        return (input % 400 == 0) || (input % 4 == 0 && input % 100 != 0);
     }
 
     // 解析日期字符串为 LocalDate 对象

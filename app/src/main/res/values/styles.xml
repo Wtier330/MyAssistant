@@ -9,4 +9,14 @@
         <item name="android:gravity">center</item>
         <item name="android:orientation">horizontal</item>
     </style>
+    <!-- 在 res/values/styles.xml 中定义自定义样式 -->
+        <style name="CustomErrorTextStyle" parent="TextAppearance.AppCompat">
+            <!-- 设置错误提示的文本颜色 -->
+            <item name="android:textColor">@color/greenA0EEE1</item>
+            <!-- 设置错误提示的文本大小 -->
+            <item name="android:textSize">12sp</item>
+            <!-- 设置错误提示的背景颜色 -->
+            <item name="android:background">@color/WeChatbg</item>
+        </style>
+
 </resources>
