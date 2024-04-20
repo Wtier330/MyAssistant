@@ -32,7 +32,6 @@ public class DateCalu_Main extends AppCompatActivity {
     private EditText et_DateCalu_InputMonth;
     private EditText et_DateCalu_InputDay;
     private EditText et_DateCalu_Input;
-    private boolean LeapYear = false;
     private int input = 367;
     private String year, month, day;
     private String outyear, outmonth, outday;
@@ -44,7 +43,6 @@ public class DateCalu_Main extends AppCompatActivity {
     private Button mBtDateCaluDiff;
     private TextView mTvDateCalueDiff;
     private LocalDate date, outdate;
-    private EditTextUtils editTextUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,80 +69,107 @@ public class DateCalu_Main extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void initEvent() {
         mBtDateCaluAd.setOnClickListener((l) -> {
-            input = Integer.parseInt(Objects.requireNonNull(et_DateCalu_Input.getText()).toString());
-            et_DateCalu_Input.setText(String.valueOf(Math.abs(input)));
-            input = Integer.parseInt(et_DateCalu_Input.getText().toString());
             year = et_DateCalu_InputYear.getText().toString().trim();
             month = et_DateCalu_InputMonth.getText().toString().trim();
             day = et_DateCalu_InputDay.getText().toString().trim();
-            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty()) {
-                if (isValidDate(year, month, day)) {
-
-                    date = formateDate(year, month, day);
-                    tv_DateCalue_Result.setText(addOrSubtractDays(formateDate(year, month, day), Math.abs(input)).toString());
+            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !et_DateCalu_Input.getText().toString().trim().isEmpty()) {
+                EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear, et_DateCalu_InputMonth, et_DateCalu_InputDay, et_DateCalu_Input);
+                if (year.length() == 4) {
+                    input = Integer.parseInt(et_DateCalu_Input.getText().toString());
+                    et_DateCalu_Input.setText(String.valueOf(Math.abs(input)));
+                    if (isValidDate(year, month, day)) {
+                        date = formateDate(year, month, day);
+                        tv_DateCalue_Result.setText(addOrSubtractDays(formateDate(year, month, day), Math.abs(input)).toString());
+                    } else {
+                        ToastUtil.toastShort(this, "输入的日期不合理");
+                    }
                 } else {
-                    ToastUtil.toastShort(this,"输入的日期不合理");
+                    ToastUtil.toastShort(this, "仅支持四位数年份");
+
                 }
 
             } else {
-                if (!TextUtils.isEmpty(year)) {
-                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear);
-                } else {
-                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputYear);
-                }
-                if (!TextUtils.isEmpty(month)) {
-                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputMonth);
-                } else {
-                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputMonth);
-                }
-                if (!TextUtils.isEmpty(day)) {
-                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputDay);
-                } else {
-                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputDay);
-                }
-
+                booInteraction(year, et_DateCalu_InputYear);
+                booInteraction(month, et_DateCalu_InputMonth);
+                booInteraction(day, et_DateCalu_InputDay);
             }
-
+            if (et_DateCalu_Input.getText().toString().trim().isEmpty()) {
+                EditTextUtils.InputIsEmpty(this, et_DateCalu_Input);
+                input = 0;
+            }
         });
 
         mBtDateCaluBc.setOnClickListener((l) -> {
-            input = Integer.parseInt(et_DateCalu_Input.getText().toString());
-            et_DateCalu_Input.setText(String.valueOf(-Math.abs(input)));
             year = et_DateCalu_InputYear.getText().toString().trim();
             month = et_DateCalu_InputMonth.getText().toString().trim();
             day = et_DateCalu_InputDay.getText().toString().trim();
-            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty()) {
-                date = formateDate(year, month, day);
-                tv_DateCalue_Result.setText(addOrSubtractDays(date, -Math.abs(input)).toString());
-            } else {
-                if (!TextUtils.isEmpty(year)) {
-                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear);
+
+            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !et_DateCalu_Input.getText().toString().trim().isEmpty()) {
+                EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear, et_DateCalu_InputMonth, et_DateCalu_InputDay, et_DateCalu_Input);
+                if (year.length() == 4) {
+                    input = Integer.parseInt(et_DateCalu_Input.getText().toString());
+                    et_DateCalu_Input.setText(String.valueOf(-Math.abs(input)));
+                    if (isValidDate(year, month, day)) {
+                        date = formateDate(year, month, day);
+                        tv_DateCalue_Result.setText(addOrSubtractDays(formateDate(year, month, day), -Math.abs(input)).toString());
+                    } else {
+                        ToastUtil.toastShort(this, "输入的日期不合理");
+                    }
                 } else {
-                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputYear);
-                }
-                if (!TextUtils.isEmpty(month)) {
-                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputMonth);
-                } else {
-                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputMonth);
-                }
-                if (!TextUtils.isEmpty(day)) {
-                    EditTextUtils.InputNotEmpty(this, et_DateCalu_InputDay);
-                } else {
-                    EditTextUtils.InputIsEmpty(this, et_DateCalu_InputDay);
+                    ToastUtil.toastShort(this, "仅支持四位数年份");
                 }
 
+            } else {
+                booInteraction(year, et_DateCalu_InputYear);
+                booInteraction(month, et_DateCalu_InputMonth);
+                booInteraction(day, et_DateCalu_InputDay);
             }
+            if (et_DateCalu_Input.getText().toString().trim().isEmpty()) {
+                EditTextUtils.InputIsEmpty(this, et_DateCalu_Input);
+                input = 0;
+            }
+
         });
         mBtDateCaluDiff.setOnClickListener((l) -> {
             outyear = mEtDateCaluOutputYear.getText().toString().trim();
             outmonth = mEtDateCaluOutputMonth.getText().toString().trim();
             outday = mEtDateCaluOutputDay.getText().toString().trim();
-            outdate = formateDate(outyear, outmonth, outday);
-            date = formateDate(year, month, day);
-            mTvDateCalueDiff.setText(String.valueOf(calculateDaysBetween(outdate, date)));
+            year = et_DateCalu_InputYear.getText().toString().trim();
+            month = et_DateCalu_InputMonth.getText().toString().trim();
+            day = et_DateCalu_InputDay.getText().toString().trim();
+            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !outyear.isEmpty() && !outmonth.isEmpty() && !outday.isEmpty()) {
+                EditTextUtils.InputNotEmpty(this, et_DateCalu_InputDay, et_DateCalu_InputMonth, et_DateCalu_InputYear, mEtDateCaluOutputYear, mEtDateCaluOutputMonth, mEtDateCaluOutputDay);
+                if (year.length() == 4 && outyear.length() == 4) {
+                    if (isValidDate(year, month, day) && isValidDate(outyear, outmonth, outday)) {
+                        date = formateDate(year, month, day);
+                        outdate = formateDate(outyear, outmonth, outday);
+
+                        mTvDateCalueDiff.setText(String.valueOf(calculateDaysBetween(outdate, date)));
+
+                    } else {
+                        ToastUtil.toastShort(this, "输入的日期不合理");
+                    }
+                } else {
+                    ToastUtil.toastShort(this, "仅支持四位数年份");
+
+                }
+
+            } else {
+                booInteraction(year, et_DateCalu_InputYear);
+                booInteraction(month, et_DateCalu_InputMonth);
+                booInteraction(day, et_DateCalu_InputDay);
+                booInteraction(outyear, mEtDateCaluOutputYear);
+                booInteraction(outmonth, mEtDateCaluOutputMonth);
+                booInteraction(outday, mEtDateCaluOutputDay);
+            }
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 
     //判断是否为闰年
     private boolean isLeapYear(int input) {
@@ -167,6 +192,7 @@ public class DateCalu_Main extends AppCompatActivity {
         return date.plusDays(days);
     }
 
+
     private LocalDate formateDate(String y, String m, String d) {
         if (Integer.parseInt(m) < 10) {
             m = "0".concat(m);
@@ -175,6 +201,14 @@ public class DateCalu_Main extends AppCompatActivity {
             d = "0".concat(d);
         }
         return parseDate(y.concat("-").concat(m).concat("-").concat(d));
+    }
+
+    private void booInteraction(String Date, EditText editText) {
+        if (!TextUtils.isEmpty(Date)) {
+            EditTextUtils.InputNotEmpty(this, editText);
+        } else {
+            EditTextUtils.InputIsEmpty(this, editText);
+        }
     }
 
     private void initView() {
