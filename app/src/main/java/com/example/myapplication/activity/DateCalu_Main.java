@@ -12,13 +12,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.utils.EditTextUtils;
+import com.example.myapplication.utils.EditTextUtil;
 import com.example.myapplication.utils.ToastUtil;
+import com.example.myapplication.view.MyEditText;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * @author witer330
@@ -28,18 +30,16 @@ import java.util.Objects;
 public class DateCalu_Main extends AppCompatActivity {
     private TextView tv_DateCalu_RegionTitle;
     private TextView tv_DateCalue_Result;
-    private EditText et_DateCalu_InputYear;
-    private EditText et_DateCalu_InputMonth;
-    private EditText et_DateCalu_InputDay;
-    private EditText et_DateCalu_Input;
-    private int input = 367;
+    private MyEditText et_DateCalu_InputYear;
+    private MyEditText et_DateCalu_InputMonth;
+    private MyEditText et_DateCalu_InputDay;
+    private MyEditText et_DateCalu_Input;
+    private int input = (int) (Math.random() * 100);
     private String year, month, day;
     private String outyear, outmonth, outday;
     private Button mBtDateCaluBc;
     private Button mBtDateCaluAd;
-    private EditText mEtDateCaluOutputYear;
-    private EditText mEtDateCaluOutputMonth;
-    private EditText mEtDateCaluOutputDay;
+    private MyEditText mEtDateCaluOutputYear, mEtDateCaluOutputMonth, mEtDateCaluOutputDay;
     private Button mBtDateCaluDiff;
     private TextView mTvDateCalueDiff;
     private LocalDate date, outdate;
@@ -54,28 +54,31 @@ public class DateCalu_Main extends AppCompatActivity {
     }
 
     private void initData() {
+        et_DateCalu_Input.setText(String.valueOf(input));
         LocalDate currentDate = LocalDate.now();
-        input = Integer.parseInt(Objects.requireNonNull(et_DateCalu_Input.getText()).toString());
         year = String.valueOf(currentDate.getYear());
         month = String.valueOf(currentDate.getMonthValue());
         day = String.valueOf(currentDate.getDayOfMonth());
 
-        et_DateCalu_InputYear.setText(String.valueOf(currentDate.getYear()));
-        et_DateCalu_InputMonth.setText(String.valueOf(currentDate.getMonthValue()));
-        et_DateCalu_InputDay.setText(String.valueOf(currentDate.getDayOfMonth()));
+        et_DateCalu_InputYear.setText(year);
+        et_DateCalu_InputMonth.setText(month);
+        et_DateCalu_InputDay.setText(day);
     }
 
 
     @SuppressLint("SetTextI18n")
     private void initEvent() {
         mBtDateCaluAd.setOnClickListener((l) -> {
-            year = et_DateCalu_InputYear.getText().toString().trim();
-            month = et_DateCalu_InputMonth.getText().toString().trim();
-            day = et_DateCalu_InputDay.getText().toString().trim();
-            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !et_DateCalu_Input.getText().toString().trim().isEmpty()) {
-                EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear, et_DateCalu_InputMonth, et_DateCalu_InputDay, et_DateCalu_Input);
-                if (year.length() == 4) {
-                    input = Integer.parseInt(et_DateCalu_Input.getText().toString());
+            year = et_DateCalu_InputYear.getTextToStr();
+            month = et_DateCalu_InputMonth.getTextToStr();
+            day = et_DateCalu_InputDay.getTextToStr();
+            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !et_DateCalu_Input.isNull()) {
+                et_DateCalu_InputYear.InputNotEmpty();
+                et_DateCalu_InputMonth.InputNotEmpty();
+                et_DateCalu_InputDay.InputNotEmpty();
+                et_DateCalu_Input.InputNotEmpty();
+                if (et_DateCalu_InputYear.validate()) {
+                    input = Integer.parseInt(et_DateCalu_Input.getTextToStr());
                     et_DateCalu_Input.setText(String.valueOf(Math.abs(input)));
                     if (isValidDate(year, month, day)) {
                         date = formateDate(year, month, day);
@@ -87,27 +90,29 @@ public class DateCalu_Main extends AppCompatActivity {
                     ToastUtil.toastShort(this, "仅支持四位数年份");
 
                 }
-
             } else {
-                booInteraction(year, et_DateCalu_InputYear);
-                booInteraction(month, et_DateCalu_InputMonth);
-                booInteraction(day, et_DateCalu_InputDay);
+                booInteraction(et_DateCalu_InputYear);
+                booInteraction(et_DateCalu_InputMonth);
+                booInteraction(et_DateCalu_InputDay);
             }
-            if (et_DateCalu_Input.getText().toString().trim().isEmpty()) {
-                EditTextUtils.InputIsEmpty(this, et_DateCalu_Input);
+            if (et_DateCalu_Input.isNull()) {
+                EditTextUtil.InputIsEmpty(this, et_DateCalu_Input);
                 input = 0;
             }
         });
 
         mBtDateCaluBc.setOnClickListener((l) -> {
-            year = et_DateCalu_InputYear.getText().toString().trim();
-            month = et_DateCalu_InputMonth.getText().toString().trim();
-            day = et_DateCalu_InputDay.getText().toString().trim();
+            year = et_DateCalu_InputYear.getTextToStr();
+            month = et_DateCalu_InputMonth.getTextToStr();
+            day = et_DateCalu_InputDay.getTextToStr();
 
-            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !et_DateCalu_Input.getText().toString().trim().isEmpty()) {
-                EditTextUtils.InputNotEmpty(this, et_DateCalu_InputYear, et_DateCalu_InputMonth, et_DateCalu_InputDay, et_DateCalu_Input);
-                if (year.length() == 4) {
-                    input = Integer.parseInt(et_DateCalu_Input.getText().toString());
+            if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !et_DateCalu_Input.isNull()) {
+                et_DateCalu_InputYear.InputNotEmpty();
+                et_DateCalu_InputMonth.InputNotEmpty();
+                et_DateCalu_InputDay.InputNotEmpty();
+                et_DateCalu_Input.InputNotEmpty();
+                if (et_DateCalu_InputYear.validate()) {
+                    input = Integer.parseInt(et_DateCalu_Input.getTextToStr());
                     et_DateCalu_Input.setText(String.valueOf(-Math.abs(input)));
                     if (isValidDate(year, month, day)) {
                         date = formateDate(year, month, day);
@@ -120,26 +125,31 @@ public class DateCalu_Main extends AppCompatActivity {
                 }
 
             } else {
-                booInteraction(year, et_DateCalu_InputYear);
-                booInteraction(month, et_DateCalu_InputMonth);
-                booInteraction(day, et_DateCalu_InputDay);
+                booInteraction(et_DateCalu_InputYear);
+                booInteraction(et_DateCalu_InputMonth);
+                booInteraction(et_DateCalu_InputDay);
             }
-            if (et_DateCalu_Input.getText().toString().trim().isEmpty()) {
-                EditTextUtils.InputIsEmpty(this, et_DateCalu_Input);
+            if (et_DateCalu_Input.isNull()) {
+                EditTextUtil.InputIsEmpty(this, et_DateCalu_Input);
                 input = 0;
             }
-
         });
+
         mBtDateCaluDiff.setOnClickListener((l) -> {
-            outyear = mEtDateCaluOutputYear.getText().toString().trim();
-            outmonth = mEtDateCaluOutputMonth.getText().toString().trim();
-            outday = mEtDateCaluOutputDay.getText().toString().trim();
-            year = et_DateCalu_InputYear.getText().toString().trim();
-            month = et_DateCalu_InputMonth.getText().toString().trim();
-            day = et_DateCalu_InputDay.getText().toString().trim();
+            outyear = mEtDateCaluOutputYear.getTextToStr();
+            outmonth = mEtDateCaluOutputMonth.getTextToStr();
+            outday = mEtDateCaluOutputDay.getTextToStr();
+            year = et_DateCalu_InputYear.getTextToStr();
+            month = et_DateCalu_InputMonth.getTextToStr();
+            day = et_DateCalu_InputDay.getTextToStr();
             if (!year.isEmpty() && !month.isEmpty() && !day.isEmpty() && !outyear.isEmpty() && !outmonth.isEmpty() && !outday.isEmpty()) {
-                EditTextUtils.InputNotEmpty(this, et_DateCalu_InputDay, et_DateCalu_InputMonth, et_DateCalu_InputYear, mEtDateCaluOutputYear, mEtDateCaluOutputMonth, mEtDateCaluOutputDay);
-                if (year.length() == 4 && outyear.length() == 4) {
+                et_DateCalu_InputYear.InputNotEmpty();
+                et_DateCalu_InputMonth.InputNotEmpty();
+                et_DateCalu_InputDay.InputNotEmpty();
+                mEtDateCaluOutputYear.InputNotEmpty();
+                mEtDateCaluOutputMonth.InputNotEmpty();
+                mEtDateCaluOutputDay.InputNotEmpty();
+                if (et_DateCalu_InputYear.validate() && mEtDateCaluOutputYear.validate()) {
                     if (isValidDate(year, month, day) && isValidDate(outyear, outmonth, outday)) {
                         date = formateDate(year, month, day);
                         outdate = formateDate(outyear, outmonth, outday);
@@ -151,16 +161,15 @@ public class DateCalu_Main extends AppCompatActivity {
                     }
                 } else {
                     ToastUtil.toastShort(this, "仅支持四位数年份");
-
                 }
 
             } else {
-                booInteraction(year, et_DateCalu_InputYear);
-                booInteraction(month, et_DateCalu_InputMonth);
-                booInteraction(day, et_DateCalu_InputDay);
-                booInteraction(outyear, mEtDateCaluOutputYear);
-                booInteraction(outmonth, mEtDateCaluOutputMonth);
-                booInteraction(outday, mEtDateCaluOutputDay);
+                booInteraction(et_DateCalu_InputYear);
+                booInteraction(et_DateCalu_InputMonth);
+                booInteraction(et_DateCalu_InputDay);
+                booInteraction(mEtDateCaluOutputYear);
+                booInteraction(mEtDateCaluOutputMonth);
+                booInteraction(mEtDateCaluOutputDay);
             }
         });
     }
@@ -169,11 +178,6 @@ public class DateCalu_Main extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         finish();
-    }
-
-    //判断是否为闰年
-    private boolean isLeapYear(int input) {
-        return (input % 400 == 0) || (input % 4 == 0 && input % 100 != 0);
     }
 
     // 解析日期字符串为 LocalDate 对象
@@ -192,7 +196,6 @@ public class DateCalu_Main extends AppCompatActivity {
         return date.plusDays(days);
     }
 
-
     private LocalDate formateDate(String y, String m, String d) {
         if (Integer.parseInt(m) < 10) {
             m = "0".concat(m);
@@ -203,16 +206,19 @@ public class DateCalu_Main extends AppCompatActivity {
         return parseDate(y.concat("-").concat(m).concat("-").concat(d));
     }
 
-    private void booInteraction(String Date, EditText editText) {
-        if (!TextUtils.isEmpty(Date)) {
-            EditTextUtils.InputNotEmpty(this, editText);
+    private void booInteraction(MyEditText editText) {
+        if (!editText.isNull()) {
+            editText.InputNotEmpty();
         } else {
-            EditTextUtils.InputIsEmpty(this, editText);
+            editText.InputIsEmpty();
         }
     }
 
     private void initView() {
         et_DateCalu_InputYear = findViewById(R.id.et_DateCalu_InputYear);
+        et_DateCalu_InputYear.setValidFun((value) -> {
+            return value.length() == 4;
+        });
         et_DateCalu_InputMonth = findViewById(R.id.et_DateCalu_InputMonth);
         et_DateCalu_InputDay = findViewById(R.id.et_DateCalu_InputDay);
         et_DateCalu_Input = findViewById(R.id.et_DateCalu_Input);
@@ -221,6 +227,9 @@ public class DateCalu_Main extends AppCompatActivity {
         mBtDateCaluBc = findViewById(R.id.bt_DateCalu_bc);
         mBtDateCaluAd = findViewById(R.id.bt_DateCalu_ad);
         mEtDateCaluOutputYear = findViewById(R.id.et_DateCalu_OutputYear);
+        mEtDateCaluOutputYear.setValidFun((value) -> {
+            return value.length() == 4;
+        });
         mEtDateCaluOutputMonth = findViewById(R.id.et_DateCalu_OutputMonth);
         mEtDateCaluOutputDay = findViewById(R.id.et_DateCalu_OutputDay);
         mBtDateCaluDiff = findViewById(R.id.bt_DateCalu_diff);

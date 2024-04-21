@@ -2,7 +2,6 @@ package com.example.myapplication.utils;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.media.MediaScannerConnection;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
@@ -11,7 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.R;
 
-public class EditTextUtils {
+public class EditTextUtil {
 
     public static void areEditTextsEmpty(EditText... editTexts) {
         for (EditText editText : editTexts) {

@@ -23,7 +23,10 @@ public class TimeUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
         return format.format(date);
     }
-
+    //判断是否为闰年
+    private boolean isLeapYear(int input) {
+        return (input % 400 == 0) || (input % 4 == 0 && input % 100 != 0);
+    }
     public static boolean isValidDate(int year, int month, int dayOfMonth) {
         try {
             // 使用 LocalDate 类创建日期对象
