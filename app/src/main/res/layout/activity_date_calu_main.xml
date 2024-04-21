@@ -86,6 +86,7 @@
             android:gravity="center_horizontal"
             android:text="月"
             android:textSize="12sp" />
+
         <com.example.myapplication.view.MyEditText
             android:id="@+id/et_DateCalu_InputDay"
             android:layout_width="80dp"
@@ -178,32 +179,40 @@
             android:gravity="center_horizontal"
             android:text="计算结果"
             android:textSize="24sp" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <View
-                android:layout_width="300dp"
-                android:layout_gravity="center_vertical"
-                android:layout_height="24dp"/>
 
-            <ImageView
-                android:layout_width="24dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="24dp"
-                android:layout_marginLeft="15dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/clipboard_solid"
-                android:id="@+id/iv_Calu_clipBoard"/>
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/clipboard_solid"
-              />
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_Calu_clipBoard"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toLeftOf="@id/iv_Calu_Collection"
+                    android:src="@drawable/clipboard_solid" />
+
+                <ImageView
+                    android:id="@+id/iv_Calu_Collection"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="64dp"
+                    android:src="@drawable/add_collection" />
+
+
+            </RelativeLayout>
+
 
         </LinearLayout>
     </LinearLayout>
@@ -247,6 +256,7 @@
             android:gravity="center_horizontal"
             android:text="年"
             android:textSize="12sp" />
+
         <com.example.myapplication.view.MyEditText
             android:id="@+id/et_DateCalu_OutputMonth"
             android:layout_width="80dp"
@@ -265,6 +275,7 @@
             android:gravity="center_horizontal"
             android:text="月"
             android:textSize="12sp" />
+
         <com.example.myapplication.view.MyEditText
             android:id="@+id/et_DateCalu_OutputDay"
             android:layout_width="80dp"
@@ -295,6 +306,7 @@
         android:text="做差"
         android:textColor="#e5e5e5"
         android:textSize="15sp" />
+
     <TextView
         android:id="@+id/tv_DateCalue_diff"
         android:layout_width="match_parent"

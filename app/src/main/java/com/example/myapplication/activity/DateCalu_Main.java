@@ -1,12 +1,18 @@
 package com.example.myapplication.activity;
 
+import static android.content.ContentValues.TAG;
 import static com.example.myapplication.utils.TimeUtil.isValidDate;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +20,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.utils.EditTextUtil;
 import com.example.myapplication.utils.ToastUtil;
+import com.example.myapplication.utils.XmlUtil;
 import com.example.myapplication.view.MyEditText;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
@@ -43,7 +51,9 @@ public class DateCalu_Main extends AppCompatActivity {
     private Button mBtDateCaluDiff;
     private TextView mTvDateCalueDiff;
     private LocalDate date, outdate;
-
+    private ImageView iv_Calu_clipBoard, iv_Calu_Collection;
+    private ClipboardManager clipboardManager;
+    private XmlUtil xmlHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +61,34 @@ public class DateCalu_Main extends AppCompatActivity {
         initView();
         initData();
         initEvent();
+        test();
     }
 
+    private void test() {
+        // 创建 XML 文件
+        XmlUtil.createXml(this, "aa.xml");
+
+        // 添加节点到 XML 文件
+        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
+        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
+        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
+        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
+
+        // 查询节点值
+        String name = XmlUtil.queryNode(this, "aa.xml", "name");
+        ToastUtil.toastShort(this,"name:"+name);
+
+        // 修改节点值
+//        XmlUtil.updateNode(this, "data.xml", "name", "Jane Doe");
+
+        // 查询修改后的节点值
+//        String updatedName = XmlUtil.queryNode(this, "data.xml", "name");
+//        Log.d(TAG, "Updated Name: " + updatedName);
+
+        // 删除节点从 XML 文件
+//        XmlUtil.deleteNode(this, "data.xml", "name");
+
+    }
     private void initData() {
         et_DateCalu_Input.setText(String.valueOf(input));
         LocalDate currentDate = LocalDate.now();
@@ -172,6 +208,15 @@ public class DateCalu_Main extends AppCompatActivity {
                 booInteraction(mEtDateCaluOutputDay);
             }
         });
+        iv_Calu_clipBoard.setOnClickListener((l) -> {
+            clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clipData = ClipData.newPlainText("label", tv_DateCalue_Result.getText());
+            clipboardManager.setPrimaryClip(clipData);
+            ToastUtil.toastShort(this, "以下信息被复制到剪切板\n" + tv_DateCalue_Result.getText());
+        });
+        iv_Calu_Collection.setOnClickListener((l) -> {
+
+        });
     }
 
     @Override
@@ -234,6 +279,8 @@ public class DateCalu_Main extends AppCompatActivity {
         mEtDateCaluOutputDay = findViewById(R.id.et_DateCalu_OutputDay);
         mBtDateCaluDiff = findViewById(R.id.bt_DateCalu_diff);
         mTvDateCalueDiff = findViewById(R.id.tv_DateCalue_diff);
+        iv_Calu_clipBoard = findViewById(R.id.iv_Calu_clipBoard);
+        iv_Calu_Collection = findViewById(R.id.iv_Calu_Collection);
     }
 
 }
