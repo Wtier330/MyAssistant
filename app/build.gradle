@@ -50,9 +50,14 @@ android {
         }
     }
     ndkVersion '24.0.8215888'
+    buildFeatures{viewBinding true}
 }
 
 dependencies {
+    def room_version = "2.6.1"
+    //ORM
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
     //时间选择器
     implementation 'com.contrarywind:Android-PickerView:3.2.7'
 
@@ -60,9 +65,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.14.2'
     implementation 'com.squareup.okio:okio:1.17.4'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
-    //
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    //lombok
+    def lombok_version = "1.18.24"
+    compileOnly "org.projectlombok:lombok:$lombok_version"
+    annotationProcessor "org.projectlombok:$lombok_version"
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.material:material:1.5.0-alpha03'
     implementation 'androidx.appcompat:appcompat:1.2.0'

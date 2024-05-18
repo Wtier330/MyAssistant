@@ -7,17 +7,22 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Xml;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.bean.DateCalu;
+import com.example.myapplication.database.DateCaluSqliteHelper;
 import com.example.myapplication.utils.EditTextUtil;
 import com.example.myapplication.utils.ToastUtil;
 import com.example.myapplication.utils.XmlUtil;
@@ -27,6 +32,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -53,42 +62,25 @@ public class DateCalu_Main extends AppCompatActivity {
     private LocalDate date, outdate;
     private ImageView iv_Calu_clipBoard, iv_Calu_Collection;
     private ClipboardManager clipboardManager;
-    private XmlUtil xmlHelper;
+    private DateCalu dateCalu;
+    private List<DateCalu> dateCaluList = new ArrayList<>();
+    private DateCaluSqliteHelper sqliteHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_calu_main);
+        initDB();
         initView();
         initData();
         initEvent();
-        test();
     }
 
-    private void test() {
-        // 创建 XML 文件
-        XmlUtil.createXml(this, "aa.xml");
-
-        // 添加节点到 XML 文件
-        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
-        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
-        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
-        XmlUtil.addNode(this, "aa.xml", "name", "John Doe");
-
-        // 查询节点值
-        String name = XmlUtil.queryNode(this, "aa.xml", "name");
-        ToastUtil.toastShort(this,"name:"+name);
-
-        // 修改节点值
-//        XmlUtil.updateNode(this, "data.xml", "name", "Jane Doe");
-
-        // 查询修改后的节点值
-//        String updatedName = XmlUtil.queryNode(this, "data.xml", "name");
-//        Log.d(TAG, "Updated Name: " + updatedName);
-
-        // 删除节点从 XML 文件
-//        XmlUtil.deleteNode(this, "data.xml", "name");
+    private void initDB() {
+        sqliteHelper = new DateCaluSqliteHelper(this);
 
     }
+
     private void initData() {
         et_DateCalu_Input.setText(String.valueOf(input));
         LocalDate currentDate = LocalDate.now();
@@ -99,6 +91,7 @@ public class DateCalu_Main extends AppCompatActivity {
         et_DateCalu_InputYear.setText(year);
         et_DateCalu_InputMonth.setText(month);
         et_DateCalu_InputDay.setText(day);
+
     }
 
 
@@ -215,7 +208,22 @@ public class DateCalu_Main extends AppCompatActivity {
             ToastUtil.toastShort(this, "以下信息被复制到剪切板\n" + tv_DateCalue_Result.getText());
         });
         iv_Calu_Collection.setOnClickListener((l) -> {
-
+            MyEditText myEditText = new MyEditText(this) ;
+            myEditText.setSingleLine();
+            myEditText.setHint("标签");
+            myEditText.requestFocus();
+            myEditText.setFocusable(true);
+            AlertDialog.Builder inputDialog = new AlertDialog.Builder(this)
+                    .setTitle("设置一个备注~")
+                    .setView(myEditText)
+                    .setPositiveButton("确定",(dialog,which)->{
+                        dateCalu.setName(myEditText.getTextToStr());
+                        dateCalu.setResult(tv_DateCalue_Result.getText().toString().trim());
+//                        dateCalu.setInputTime();
+//                        sqliteHelper.insertData();
+                    }).setPositiveButton("取消",(dialog,i)->{
+                       dialog.dismiss();
+                    });
         });
     }
 
