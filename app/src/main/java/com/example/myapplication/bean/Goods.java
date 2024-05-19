@@ -4,33 +4,33 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.Builder;
 import lombok.Data;
 
-@Data
 @Entity(tableName = "tb_goods")
 //id	CusBarcode	GoodsName  MinUnit	PakeagRate	MaxUnit	BarCode	InPrice	SalePrice	CreateTime	ModifyTime
+@Data
 public class Goods {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int id;
     @ColumnInfo(name = "CusBarCode")
-    private String CusBarcode;
+    public String CusBarcode;
     @ColumnInfo(name = "GoodsName")
-    private String GoodsName;
+    public String GoodsName;
     @ColumnInfo(name = "MinUnit")
-    private String MinUnit;
+    public String MinUnit;
     @ColumnInfo(name = "PakeagRate")
-    private String PakeagRate;
+    public String PakeagRate;
     @ColumnInfo(name = "MaxUnit")
-    private String MaxUnit;
+    public String MaxUnit;
     @ColumnInfo(name = "BarCode")
-    private String BarCode;
+    public String BarCode;
     @ColumnInfo(name = "InPrice")
-    private String InPrice;
+    public String InPrice;
     @ColumnInfo(name = "SalePrice")
-    private String SalePrice;
+    public String SalePrice;
     @ColumnInfo(name = "CreateTime")
-    private String CreateTime;
+    public String CreateTime;
     @ColumnInfo(name = "ModifyTime")
-    private String ModifyTime;
+    public String ModifyTime;
+
 }

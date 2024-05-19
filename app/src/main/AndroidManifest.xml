@@ -48,14 +48,26 @@
             android:exported="false"
             android:label="记事本列表主界面" />
         <activity
+            android:name=".activity.TestActivity"
+            android:exported="false"
+            android:label="测试" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".activity.Main2Activity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>

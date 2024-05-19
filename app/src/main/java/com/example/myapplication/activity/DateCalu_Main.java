@@ -1,19 +1,13 @@
 package com.example.myapplication.activity;
 
-import static android.content.ContentValues.TAG;
 import static com.example.myapplication.utils.TimeUtil.isValidDate;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.util.Xml;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,19 +19,13 @@ import com.example.myapplication.bean.DateCalu;
 import com.example.myapplication.database.DateCaluSqliteHelper;
 import com.example.myapplication.utils.EditTextUtil;
 import com.example.myapplication.utils.ToastUtil;
-import com.example.myapplication.utils.XmlUtil;
 import com.example.myapplication.view.MyEditText;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
 
 /**
  * @author witer330
