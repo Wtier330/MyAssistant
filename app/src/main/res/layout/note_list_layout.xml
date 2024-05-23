@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--item布局，自定义View-->
-<com.example.myapplication.view.LeftSlideView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.myapplication.ui.LeftSlideView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@android:color/white"
@@ -163,4 +163,4 @@
 
 
     </RelativeLayout>
-</com.example.myapplication.view.LeftSlideView>
+</com.example.myapplication.ui.LeftSlideView>

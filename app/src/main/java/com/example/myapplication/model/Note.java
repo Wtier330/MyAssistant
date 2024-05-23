@@ -1,5 +1,5 @@
 
-package com.example.myapplication.bean;
+package com.example.myapplication.model;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -7,9 +7,6 @@ import java.util.Date;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  * @author WTL

@@ -1,7 +1,6 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,12 @@ import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.activity.Weather_Main;
-import com.example.myapplication.bean.DayWeather;
+import com.example.myapplication.model.DayWeather;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import lombok.Data;
 
 public class WeatherFutherAdapter extends RecyclerView.Adapter<WeatherFutherAdapter.futherViewHolder> {
     private Context weaContext;

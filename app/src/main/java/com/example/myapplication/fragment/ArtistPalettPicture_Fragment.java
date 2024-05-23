@@ -29,8 +29,8 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.bean.ArtistPalett;
-import com.example.myapplication.database.ArtistPalettSqilteHelper;
+import com.example.myapplication.model.ArtistPalett;
+import com.example.myapplication.repository.ArtistPalettSqilteHelper;
 import com.example.myapplication.utils.ToastUtil;
 
 import java.util.ArrayList;

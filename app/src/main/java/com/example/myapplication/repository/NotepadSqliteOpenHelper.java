@@ -1,4 +1,4 @@
-package com.example.myapplication.database;
+package com.example.myapplication.repository;
 
 
 
@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 
-import com.example.myapplication.bean.Note;
+import com.example.myapplication.model.Note;
 
 import java.util.ArrayList;
 import java.util.Date;

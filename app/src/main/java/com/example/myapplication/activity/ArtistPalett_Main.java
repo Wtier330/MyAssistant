@@ -12,15 +12,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.FragmentIndexAdapter;
-import com.example.myapplication.bean.ArtistPalett;
-import com.example.myapplication.bean.Note;
-import com.example.myapplication.database.ArtistPalettSqilteHelper;
-import com.example.myapplication.database.NotepadSqliteOpenHelper;
+import com.example.myapplication.model.ArtistPalett;
+import com.example.myapplication.repository.ArtistPalettSqilteHelper;
 import com.example.myapplication.fragment.ArtistPalettCollection_Fragment;
 import com.example.myapplication.fragment.ArtistPalettDrawboard_Fragment;
 import com.example.myapplication.fragment.ArtistPalettPicture_Fragment;
 import com.example.myapplication.fragment.ArtistPalettSetting_Fragment;
-import com.example.myapplication.view.MyViewPager;
+import com.example.myapplication.ui.MyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;

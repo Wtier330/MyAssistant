@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.TestActivity">
 
     <Button
@@ -16,4 +17,9 @@
         android:id="@+id/iv_readIcon"
         android:layout_width="100dp"
         android:layout_height="100dp" />
+
+    <TextView
+        android:id="@+id/tv_readtest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

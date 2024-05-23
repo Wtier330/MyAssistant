@@ -1,11 +1,11 @@
-package com.example.myapplication.database;
+package com.example.myapplication.repository;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.myapplication.bean.Goods;
+import com.example.myapplication.model.Goods;
 
 import java.util.List;
 

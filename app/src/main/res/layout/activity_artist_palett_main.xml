@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.myapplication.view.MyViewPager
+        <com.example.myapplication.ui.MyViewPager
             android:id="@+id/index_vp_fragment_list_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true">
 
-        </com.example.myapplication.view.MyViewPager>
+        </com.example.myapplication.ui.MyViewPager>
 
         <FrameLayout
             android:id="@+id/index_fl_bottom_bar"

@@ -1,4 +1,4 @@
-package com.example.myapplication.database;
+package com.example.myapplication.repository;
 
 import static com.example.myapplication.constants.DBconstants.DB_NAME;
 

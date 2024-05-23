@@ -20,10 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.activity.Note_Edit;
-import com.example.myapplication.bean.Note;
-import com.example.myapplication.database.NotepadSqliteOpenHelper;
+import com.example.myapplication.model.Note;
+import com.example.myapplication.repository.NotepadSqliteOpenHelper;
 import com.example.myapplication.utils.ViewUtil;
-import com.example.myapplication.view.LeftSlideView;
+import com.example.myapplication.ui.LeftSlideView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.apache.commons.lang3.time.DateUtils;

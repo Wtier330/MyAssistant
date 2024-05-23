@@ -1,4 +1,4 @@
-package com.example.myapplication.view;
+package com.example.myapplication.ui;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;

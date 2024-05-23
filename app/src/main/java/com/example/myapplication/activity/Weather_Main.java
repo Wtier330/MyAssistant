@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import okhttp3.OkHttpClient;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,12 +19,11 @@ import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.WeatherFutherAdapter;
-import com.example.myapplication.bean.DayWeather;
-import com.example.myapplication.bean.Weather;
+import com.example.myapplication.model.DayWeather;
+import com.example.myapplication.model.Weather;
 import com.example.myapplication.utils.WeatherNetUtil;
 import com.google.gson.Gson;
 
-import java.time.DayOfWeek;
 import java.util.List;
 
 public class Weather_Main extends AppCompatActivity {

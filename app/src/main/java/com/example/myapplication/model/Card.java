@@ -1,6 +1,4 @@
-package com.example.myapplication.bean;
-
-import androidx.room.PrimaryKey;
+package com.example.myapplication.model;
 
 public class Card {
     private int id;

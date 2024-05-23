@@ -48,7 +48,7 @@
                 android:textSize="8sp" />
         </LinearLayout>
 
-        <com.example.myapplication.view.MyEditText
+        <com.example.myapplication.ui.MyEditText
             android:id="@+id/et_DateCalu_InputYear"
             android:layout_width="79dp"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:text="年"
             android:textSize="12sp" />
 
-        <com.example.myapplication.view.MyEditText
+        <com.example.myapplication.ui.MyEditText
             android:id="@+id/et_DateCalu_InputMonth"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             android:text="月"
             android:textSize="12sp" />
 
-        <com.example.myapplication.view.MyEditText
+        <com.example.myapplication.ui.MyEditText
             android:id="@+id/et_DateCalu_InputDay"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
             android:textColor="#03884C"
             android:textSize="15sp" />
 
-        <com.example.myapplication.view.MyEditText
+        <com.example.myapplication.ui.MyEditText
             android:id="@+id/et_DateCalu_Input"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
             android:textColor="#000"
             android:textSize="12sp" />
 
-        <com.example.myapplication.view.MyEditText
+        <com.example.myapplication.ui.MyEditText
             android:id="@+id/et_DateCalu_OutputYear"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
             android:text="年"
             android:textSize="12sp" />
 
-        <com.example.myapplication.view.MyEditText
+        <com.example.myapplication.ui.MyEditText
             android:id="@+id/et_DateCalu_OutputMonth"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -276,7 +276,7 @@
             android:text="月"
             android:textSize="12sp" />
 
-        <com.example.myapplication.view.MyEditText
+        <com.example.myapplication.ui.MyEditText
             android:id="@+id/et_DateCalu_OutputDay"
             android:layout_width="80dp"
             android:layout_height="wrap_content"

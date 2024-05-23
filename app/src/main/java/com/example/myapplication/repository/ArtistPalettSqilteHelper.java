@@ -1,4 +1,4 @@
-package com.example.myapplication.database;
+package com.example.myapplication.repository;
 
 import static com.example.myapplication.constants.DBconstants.ARTIST_PALETT_TABLE_NAME;
 import static com.example.myapplication.constants.DBconstants.DB_NAME;
@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.myapplication.bean.ArtistPalett;
+import com.example.myapplication.model.ArtistPalett;
 
 import java.util.ArrayList;
 import java.util.Date;

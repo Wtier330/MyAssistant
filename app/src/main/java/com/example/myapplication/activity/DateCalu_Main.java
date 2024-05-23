@@ -15,11 +15,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.bean.DateCalu;
-import com.example.myapplication.database.DateCaluSqliteHelper;
+import com.example.myapplication.model.DateCalu;
+import com.example.myapplication.repository.DateCaluSqliteHelper;
 import com.example.myapplication.utils.EditTextUtil;
 import com.example.myapplication.utils.ToastUtil;
-import com.example.myapplication.view.MyEditText;
+import com.example.myapplication.ui.MyEditText;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
